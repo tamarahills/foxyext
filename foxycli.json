@@ -1,0 +1,7 @@
+{
+  "name": "foxycli",
+  "description": "native foxy client",
+  "path": "/Volumes/development/foxy/foxycli/startup.sh",
+  "type": "stdio",
+  "allowed_extensions": [ "foxycli@example.org" ]
+}
