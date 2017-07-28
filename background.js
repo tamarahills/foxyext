@@ -11,6 +11,20 @@ port.onMessage.addListener((response) => {
   console.log('RECEIVED APP MESSAGE');
   console.log("Received: " + JSON.stringify(response));
 
+  var creating = '';
+  switch(response.cmd) {
+    case 'TIMER':
+      creating = browser.tabs.create({url:'./timer.html?duration=' +response.param});
+      break;
+    case 'WEATHER':
+      creating = browser.tabs.create({url:response.param});
+      break;
+    default:
+      break;
+  }
+
+  creating.then(onCreated, onError);
+
   function onCreated(tab) {
     console.log(`Created new tab: ${tab.id}`)
   }
@@ -19,10 +33,6 @@ port.onMessage.addListener((response) => {
     console.log(`Error: ${error}`);
   }
 
-  var creating = browser.tabs.create({
-    url:response.param
-  });
-  creating.then(onCreated, onError);
 });
 
 /*
