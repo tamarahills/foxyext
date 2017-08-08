@@ -3,6 +3,7 @@ On startup, connect to the "ping_pong" app.
 */
 var port = browser.runtime.connectNative("foxycli");
 console.log('CONNECT NATIVE CALLED');
+var currentTab;
 
 /*
 Listen for messages from the app.
@@ -12,6 +13,7 @@ port.onMessage.addListener((response) => {
   console.log("Received: " + JSON.stringify(response));
 
   var creating = '';
+  var querying = '';
   switch(response.cmd) {
     case 'TIMER':
       creating = browser.tabs.create({url:'./timer.html?duration=' +response.param});
@@ -19,11 +21,20 @@ port.onMessage.addListener((response) => {
     case 'WEATHER':
       creating = browser.tabs.create({url:response.param});
       break;
+    case 'BOOKMARK':
+      var querying = browser.tabs.query({currentWindow: true, active: true});
+      querying.then(logTabs, onError);
+      querying = browser.tabs.query({currentWindow: true, active: true});
+      break;
+    case 'SPOTIFY':
+      console.log('calling browser tab create');
+      creating = browser.tabs.create({url:'./spotify.html?playlist=' + response.param});
+      break;
     default:
       break;
   }
 
-  creating.then(onCreated, onError);
+//  creating.then(onCreated, onError);
 
   function onCreated(tab) {
     console.log(`Created new tab: ${tab.id}`)
@@ -33,6 +44,13 @@ port.onMessage.addListener((response) => {
     console.log(`Error: ${error}`);
   }
 
+  function logTabs(tabs) {
+    for (let tab of tabs) {
+      // tab.url requires the `tabs` permission
+      console.log(tab.url);
+      browser.bookmarks.create({title: tab.title, url: tab.url});
+    }
+  }
 });
 
 /*
