@@ -30,6 +30,9 @@ port.onMessage.addListener((response) => {
       console.log('calling browser tab create');
       creating = browser.tabs.create({url:'./spotify.html?playlist=' + response.param});
       break;
+    case 'IOT':
+      console.log('Got an IOT cmd: ' + response.param + ': ' + response.param2);
+      break;
     default:
       break;
   }
