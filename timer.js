@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
   var duration = getParameterByName('duration');
   console.log('Duration is:' + duration);
+  var tag = getParameterByName('tag');
+  console.log('tag is:' + tag);
   var deadline = new Date(Date.parse(new Date()) + duration * 1000);
-  initializeClock('clockdiv', deadline);
+  initializeClock('clockdiv', deadline, tag);
 });
 
 function getParameterByName(name, url) {
@@ -30,12 +32,16 @@ function getTimeRemaining(endtime) {
   };
 }
 
-function initializeClock(id, endtime) {
+function initializeClock(id, endtime, tag) {
   var clock = document.getElementById(id);
   var daysSpan = clock.querySelector('.days');
   var hoursSpan = clock.querySelector('.hours');
   var minutesSpan = clock.querySelector('.minutes');
   var secondsSpan = clock.querySelector('.seconds');
+  if (tag)
+    document.getElementById('tagHeader').innerHTML = tag + ' timer';
+
+
 
   function updateClock() {
     var t = getTimeRemaining(endtime);

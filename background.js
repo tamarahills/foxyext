@@ -16,7 +16,10 @@ port.onMessage.addListener((response) => {
   var querying = '';
   switch(response.cmd) {
     case 'TIMER':
-      creating = browser.tabs.create({url:'./timer.html?duration=' +response.param});
+      if (response.param2)
+        creating = browser.tabs.create({url:'./timer.html?duration=' +response.param + '&tag=' + response.param2});
+      else
+        creating = browser.tabs.create({url:'./timer.html?duration=' +response.param});
       break;
     case 'WEATHER':
       creating = browser.tabs.create({url:response.param});
