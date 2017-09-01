@@ -53,6 +53,8 @@ function initializeClock(id, endtime, tag) {
 
     if (t.total <= 0) {
       clearInterval(timeinterval);
+      var audio = new Audio('chime.mp3');
+      audio.play();
     }
   }
 
