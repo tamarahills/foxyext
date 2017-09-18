@@ -1,0 +1,53 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 90%;
+  font: caption;
+  background-color: #FFFFFF;
+  overflow: scroll;
+}
+
+p {
+  margin: 1em 2em;
+}
+
+.spotifycardiv {
+  background-color: #FFFFFF;
+  width: 275px;
+  height: 120px;
+  border-radius: 25px;
+  margin: 2px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
+}
+
+.timercardiv {
+  background-color: #FFFFFF;
+  width: 275px;
+  height: 120px;
+  border-radius: 25px;
+  margin: 2px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
+}
+
+.weathercardiv {
+  background-color: #FFFFFF;
+  width: 275px;
+  height: 140px;
+  border-radius: 25px;
+  margin: 2px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
+}
+
+
+.speechtext {
+  padding-top: 8px;
+  font-size: 10px;
+  font-style: italic;
+  color: #808080;
+  margin-left: 15px;
+}
