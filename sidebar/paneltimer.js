@@ -34,31 +34,17 @@ function getTimeRemaining(endtime) {
 
 function initializeClock(id, endtime, tag) {
   var clock = document.getElementById(id);
-  var daysSpan = clock.querySelector('.days');
-  var hoursSpan = clock.querySelector('.hours');
-  var minutesSpan = clock.querySelector('.minutes');
-  var secondsSpan = clock.querySelector('.seconds');
-  if (tag) {
-    document.getElementById('tagHeader').innerHTML = capitalizeFirstLetter(tag)
-      + ' Timer';
-  }
-  else {
-    document.getElementById('tagHeader').innerHTML = 'Timer';
-  }
+  var minute = clock.querySelector('minutediv');
+  var second = clock.querySelector('seconddiv');
 
-
-  function capitalizeFirstLetter(string) {
-    var tagCase = string.toLowerCase();
-    return tagCase.charAt(0).toUpperCase() + tagCase.slice(1);
-  }
+  var minutesSpan = clock.querySelector('.minutefont');
+  var secondsSpan = clock.querySelector('.secondfont');
 
   function updateClock() {
     var t = getTimeRemaining(endtime);
 
-    daysSpan.innerHTML = t.days;
-    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2) + 'm';
+    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2) + 's';
 
     if (t.total <= 0) {
       clearInterval(timeinterval);

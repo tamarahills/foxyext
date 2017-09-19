@@ -4,35 +4,24 @@ body{
   font-weight: 100;
 }
 
-h1{
-  color: black;
-  font-size: 15px;
-  margin: 0;
-}
-
-#clockdiv{
+#clockdiv > div{
     font-family: sans-serif;
     display: inline-block;
-    font-weight: 100;
     text-align: center;
-    font-size: 15px;
 }
 
-#clockdiv > div{
-    border-radius: 3px;
-    background: #5d9bc7;
-    display: inline-block;
-    margin: 5px;
+.minuteclass {
+  margin-right: 10px;
 }
 
-#clockdiv div > span{
-    padding: 15px;
-    border-radius: 3px;
-    background: #5d9bc7;
-    display: inline-block;
+.minutefont {
+  font-size: 56px;
+  color: #0F1126;
+  font-weight: bold;
 }
 
-.smalltext{
-    padding-top: 5px;
-    font-size: 11px;
+.secondfont {
+  font-size: 56px;
+  color: #0F1126;
+  font-weight: bold;
 }

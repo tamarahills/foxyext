@@ -64,10 +64,23 @@ port.onMessage.addListener((response) => {
 
       var iframe = sidebar.createElement('iframe');
       iframe.frameBorder=0;
+      iframe.width = 300;
       iframe.setAttribute("src", '/sidebar/panelweather.html?city='
         + response.param + '&weather=' + response.param5 + '&temp=' +
         + response.param2 + '&min=' + response.param3 + '&max=' +
         + response.param4 + '&description=' + response.param5);
+      iDiv.appendChild(iframe);
+      var ret = sidebar.body.appendChild(iDiv);
+      break;
+    case 'NONE':
+      var iDiv = sidebar.createElement('div');
+      iDiv.className = "confusedcardiv";
+
+      var iframe = sidebar.createElement('iframe');
+      iframe.frameBorder=0;
+      iframe.width = '99%';
+      iframe.setAttribute("src", '/sidebar/panelconfused.html?text='
+        + response.utterance);
       iDiv.appendChild(iframe);
       var ret = sidebar.body.appendChild(iDiv);
       break;
