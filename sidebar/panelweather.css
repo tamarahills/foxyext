@@ -1,0 +1,44 @@
+body{
+  text-align: left;
+  font-family: sans-serif;
+  padding-left: 8px;
+}
+
+h1{
+  color: black;
+  font-size: 15px;
+  margin: 0;
+}
+
+.cityfont {
+  font-size: 15px;
+  color: #0F1126;
+  font-weight: bold;
+}
+
+.currtempfont {
+  font-size: 56px;
+  color: #0F1126;
+  font-weight: bold;
+  margin-left: 10px;
+  vertical-align: text-bottom;
+}
+
+.highlowtempfont {
+  font-size: 12px;
+  color: #0F1126;
+}
+
+.descriptionfont {
+  font-size: 12px;
+  color: #0F1126;
+}
+.weatherDescDiv {
+  margin-top: -3px;
+}
+.weatheralign {
+  display: block;
+}
+
+.subweatherdiv {
+}

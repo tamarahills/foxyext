@@ -1,0 +1,27 @@
+body{
+  text-align: left;
+  font-family: sans-serif;
+  font-weight: 100;
+}
+
+#clockdiv > div{
+    font-family: sans-serif;
+    display: inline-block;
+    text-align: center;
+}
+
+.minuteclass {
+  margin-right: 10px;
+}
+
+.minutefont {
+  font-size: 56px;
+  color: #0F1126;
+  font-weight: bold;
+}
+
+.secondfont {
+  font-size: 56px;
+  color: #0F1126;
+  font-weight: bold;
+}

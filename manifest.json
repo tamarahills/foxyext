@@ -20,9 +20,23 @@
       "scripts": ["background.js"]
     },
 
+    "sidebar_action": {
+      "default_icon": "icons/FOXY_1.png",
+      "default_title" : "Hey Foxy",
+      "default_panel": "sidebar/panel.html"
+    },
+
     "browser_action": {
       "default_icon": "icons/message.svg"
     },
 
-    "permissions": ["nativeMessaging",  "bookmarks", "tabs"]
+    "permissions": ["nativeMessaging",  "bookmarks", "tabs"],
+
+    "commands": {
+      "_execute_sidebar_action": {
+        "suggested_key": {
+          "default": "Ctrl+Shift+Y"
+        }
+      }
+    }
 }
