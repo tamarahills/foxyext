@@ -21,7 +21,7 @@
     },
 
     "sidebar_action": {
-      "default_icon": "icons/FOXY_1.png",
+      "default_icon": "icons/Foxy-SF.svg",
       "default_title" : "Hey Foxy",
       "default_panel": "sidebar/panel.html"
     },

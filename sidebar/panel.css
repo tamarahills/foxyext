@@ -20,7 +20,6 @@ p {
   background-color: #FFFFFF;
   width: 275px;
   height: 120px;
-  border-radius: 25px;
   margin: 2px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
 }
@@ -29,7 +28,6 @@ p {
   background-color: #FFFFFF;
   width: 275px;
   height: 120px;
-  border-radius: 25px;
   margin: 2px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
 }
@@ -38,7 +36,6 @@ p {
   background-color: #FFFFFF;
   width: 275px;
   height: 120px;
-  border-radius: 25px;
   margin: 2px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
 }
@@ -47,7 +44,6 @@ p {
   background-color: #FFFFFF;
   width: 275px;
   height: 140px;
-  border-radius: 25px;
   margin: 2px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
 }
@@ -56,10 +52,8 @@ p {
   background-color: #FFFFFF;
   width: 275px;
   height: 200px;
-  border-radius: 25px;
   margin: 2px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
-  /*background-image: url("resources/sunburst.png");*/
 }
 
 .speechtext {
@@ -67,7 +61,7 @@ p {
   font-size: 10px;
   font-style: italic;
   color: #808080;
-  margin-left: 15px;
+  margin-left: 5px;
 }
 
 .iotSpeechtext {
@@ -76,11 +70,4 @@ p {
   font-style: italic;
   color: #808080;
   margin-left: 5px;
-}
-
-
-.miniIcon {
-  src: 'resources/foxyhome.svg';
-  width: 16px;
-  height: 16px;
 }
