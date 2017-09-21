@@ -11,10 +11,10 @@ port.onMessage.addListener((response) => {
   console.log("Received: " + JSON.stringify(response));
 
   var sidebar = getSidebar();
+  var iDiv = sidebar.createElement('div');
 
   switch(response.cmd) {
     case 'TIMER':
-      var iDiv = sidebar.createElement('div');
       iDiv.className = "timercardiv";
 
       var text = document.createElement('span');
@@ -31,11 +31,8 @@ port.onMessage.addListener((response) => {
         iframe.setAttribute("src", '/sidebar/paneltimer.html?duration='
           + response.param);
       }
-      iDiv.appendChild(iframe);
-      var ret = sidebar.body.appendChild(iDiv);
       break;
     case 'SPOTIFY':
-      var iDiv = sidebar.createElement('div');
       iDiv.className = "spotifycardiv";
 
       var text = document.createElement('span');
@@ -49,12 +46,8 @@ port.onMessage.addListener((response) => {
       iframe.height = 100;
       iframe.frameBorder = 0;
       iframe.scrolling = "no";
-      iDiv.appendChild(iframe);
-      var ret = sidebar.body.appendChild(iDiv);
-
       break;
     case 'WEATHER':
-      var iDiv = sidebar.createElement('div');
       iDiv.className = "weathercardiv";
 
       var text = document.createElement('span');
@@ -69,11 +62,8 @@ port.onMessage.addListener((response) => {
         + response.param + '&weather=' + response.param5 + '&temp=' +
         + response.param2 + '&min=' + response.param3 + '&max=' +
         + response.param4 + '&description=' + response.param5);
-      iDiv.appendChild(iframe);
-      var ret = sidebar.body.appendChild(iDiv);
       break;
     case 'IOT':
-      var iDiv = sidebar.createElement('div');
       iDiv.className = "iotcardiv";
       if(response.param2 == 'on') {
         iDiv.style.backgroundImage = "url('resources/sunburst.png')";
@@ -95,11 +85,8 @@ port.onMessage.addListener((response) => {
       iframe.height = 185;
       iframe.setAttribute("src", '/sidebar/paneliot.html?room='
         + response.param + '&onoff=' + response.param2);
-      iDiv.appendChild(iframe);
-      var ret = sidebar.body.appendChild(iDiv);
       break;
-    case 'NONE':
-      var iDiv = sidebar.createElement('div');
+    default: //This is also 'NONE'. If we add another, may need to break it out
       iDiv.className = "confusedcardiv";
 
       var iframe = sidebar.createElement('iframe');
@@ -107,11 +94,15 @@ port.onMessage.addListener((response) => {
       iframe.width = '99%';
       iframe.setAttribute("src", '/sidebar/panelconfused.html?text='
         + response.utterance);
-      iDiv.appendChild(iframe);
-      var ret = sidebar.body.appendChild(iDiv);
       break;
-    default:
-      break;
+  }
+  iDiv.appendChild(iframe);
+
+  if (sidebar.body.hasChildNodes()) {
+    var firstChild = sidebar.body.firstChild;
+    var insertedNode = sidebar.body.insertBefore(iDiv, firstChild);
+  } else {
+    sidebar.body.appendChild(iDiv);
   }
 });
 
