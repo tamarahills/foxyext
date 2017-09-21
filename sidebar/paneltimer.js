@@ -50,6 +50,10 @@ function initializeClock(id, endtime, tag) {
       clearInterval(timeinterval);
       var audio = new Audio('chime.mp3');
       audio.play();
+      
+      minutesSpan.innerHTML = '';
+      secondsSpan.innerHTML = 'Done!';
+      secondsSpan.style.paddingLeft = '20px';
     }
   }
 
