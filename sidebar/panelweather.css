@@ -21,7 +21,15 @@ h1{
   color: #0F1126;
   font-weight: bold;
   margin-left: 10px;
-  vertical-align: text-bottom;
+  vertical-align: top;
+}
+
+.degreesFont {
+  font-size: 15px;
+  color: #0F1126;
+  font-weight: bold;
+  margin-left: -8px;
+  vertical-align: top;
 }
 
 .highlowtempfont {
