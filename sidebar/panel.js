@@ -13,14 +13,20 @@ port.onMessage.addListener((response) => {
   var sidebar = getSidebar();
   var iDiv = sidebar.createElement('div');
 
+  // Attach the icon for the card.
+  var icon = document.createElement('img');
+  icon.style['margin-top']="3px";
+
+  // Create the Speech text
+  var text = document.createElement('span');
+  text.setAttribute("class","speechtext");
+  text.textContent = response.utterance;
+
   switch(response.cmd) {
     case 'TIMER':
       iDiv.className = "timercardiv";
 
-      var text = document.createElement('span');
-      text.setAttribute("class","speechtext");
-      text.textContent = response.utterance;
-      iDiv.appendChild(text);
+      icon.src = "./resources/foxytimer.svg";
 
       var iframe = sidebar.createElement('iframe');
       iframe.frameBorder=0;
@@ -35,10 +41,7 @@ port.onMessage.addListener((response) => {
     case 'SPOTIFY':
       iDiv.className = "spotifycardiv";
 
-      var text = document.createElement('span');
-      text.setAttribute("class","speechtext");
-      text.textContent = response.utterance;
-      iDiv.appendChild(text);
+      icon.src = "./resources/spotify.svg";
 
       var iframe = sidebar.createElement('iframe');
       iframe.setAttribute("src", '/sidebar/spotify.html?playlist=' + response.param);
@@ -50,11 +53,6 @@ port.onMessage.addListener((response) => {
     case 'WEATHER':
       iDiv.className = "weathercardiv";
 
-      var text = document.createElement('span');
-      text.setAttribute("class","speechtext");
-      text.textContent = response.utterance;
-      iDiv.appendChild(text);
-
       var iframe = sidebar.createElement('iframe');
       iframe.frameBorder=0;
       iframe.width = 300;
@@ -62,6 +60,7 @@ port.onMessage.addListener((response) => {
         + response.param + '&weather=' + response.param5 + '&temp=' +
         + response.param2 + '&min=' + response.param3 + '&max=' +
         + response.param4 + '&description=' + response.param5);
+      icon = '';
       break;
     case 'IOT':
       iDiv.className = "iotcardiv";
@@ -69,15 +68,7 @@ port.onMessage.addListener((response) => {
         iDiv.style.backgroundImage = "url('resources/sunburst.png')";
       }
 
-      var icon = document.createElement('img');
       icon.src = "./resources/foxyhome.svg";
-      icon.style['margin-top']="3px";
-      iDiv.appendChild(icon);
-
-      var text = document.createElement('span');
-      text.setAttribute("class","iotSpeechtext");
-      text.textContent = response.utterance;
-      iDiv.appendChild(text);
 
       var iframe = sidebar.createElement('iframe');
       iframe.frameBorder=0;
@@ -94,8 +85,15 @@ port.onMessage.addListener((response) => {
       iframe.width = '99%';
       iframe.setAttribute("src", '/sidebar/panelconfused.html?text='
         + response.utterance);
+      icon = '';
+      text = '';
       break;
   }
+  if (icon != '')
+    iDiv.appendChild(icon);
+  if (text != '')
+    iDiv.appendChild(text);
+
   iDiv.appendChild(iframe);
 
   if (sidebar.body.hasChildNodes()) {
