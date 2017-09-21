@@ -52,6 +52,9 @@ port.onMessage.addListener((response) => {
       break;
     case 'WEATHER':
       iDiv.className = "weathercardiv";
+      icon.src = findProperWeatherImage(response.param5);
+      icon.height = 16;
+      icon.width = 16;
 
       var iframe = sidebar.createElement('iframe');
       iframe.frameBorder=0;
@@ -60,7 +63,6 @@ port.onMessage.addListener((response) => {
         + response.param + '&weather=' + response.param5 + '&temp=' +
         + response.param2 + '&min=' + response.param3 + '&max=' +
         + response.param4 + '&description=' + response.param5);
-      icon = '';
       break;
     case 'IOT':
       iDiv.className = "iotcardiv";
@@ -118,6 +120,35 @@ function getSidebar() {
   }
   return panel;
 }
+
+// TODO:  Share this code so we don't have to duplicate.  We need to add a
+// require.js or something similar to share this.
+function findProperWeatherImage(weatherDesc) {
+  var imagefile = '';
+  var desc = weatherDesc.toLowerCase()
+  if (desc.indexOf('sun') !== -1) {
+      imageFile = './resources/sun.svg';
+  } else if (desc.indexOf('cloud') !== -1) {
+    imageFile = './resources/cloudy.svg';
+  } else if (desc.indexOf('rain') !== -1) {
+    imageFile = './resources/rain.svg';
+  } else if (desc.indexOf('snow') !== -1) {
+    imageFile = './resources/snow.svg';
+  } else if (desc.indexOf('rain') !== -1) {
+    imageFile = './resources/rain.svg';
+  } else if (desc.indexOf('wind') !== -1) {
+    imageFile = './resources/wind.svg';
+  } else if (desc.indexOf('clear') !== -1) {
+    imageFile = './resources/sun.svg';
+  } else {
+    // We should try and get an icon for
+    // 'haze', 'clear', and thunderstorm too
+    imageFile = './resources/cloudy.svg';
+  }
+
+  return imageFile;
+}
+
 
 /*
 When the sidebar loads, get the ID of its window,
