@@ -72,6 +72,32 @@ port.onMessage.addListener((response) => {
       iDiv.appendChild(iframe);
       var ret = sidebar.body.appendChild(iDiv);
       break;
+    case 'IOT':
+      var iDiv = sidebar.createElement('div');
+      iDiv.className = "iotcardiv";
+      if(response.param2 == 'on') {
+        iDiv.style.backgroundImage = "url('resources/sunburst.png')";
+      }
+
+      var icon = document.createElement('img');
+      icon.src = "./resources/foxyhome.svg";
+      icon.style['margin-top']="3px";
+      iDiv.appendChild(icon);
+
+      var text = document.createElement('span');
+      text.setAttribute("class","iotSpeechtext");
+      text.textContent = response.utterance;
+      iDiv.appendChild(text);
+
+      var iframe = sidebar.createElement('iframe');
+      iframe.frameBorder=0;
+      iframe.width = 300;
+      iframe.height = 185;
+      iframe.setAttribute("src", '/sidebar/paneliot.html?room='
+        + response.param + '&onoff=' + response.param2);
+      iDiv.appendChild(iframe);
+      var ret = sidebar.body.appendChild(iDiv);
+      break;
     case 'NONE':
       var iDiv = sidebar.createElement('div');
       iDiv.className = "confusedcardiv";

@@ -1,0 +1,28 @@
+html {
+  overflow-y: hidden;
+}
+
+body {
+  background-image: "resources/sunburst.png";
+  padding-right: 50px;
+  margin-left: 0;
+}
+
+.graphicLightDiv {
+  text-align: center;
+}
+
+.lightOn {
+  margin:  auto;
+  display: block;
+  height: "60";
+  width: "60";
+}
+
+.roomFont {
+  font-size: 15px;
+  color: #0F1126;
+  font-weight: bold;
+  font-family: sans-serif;
+  display: inline-block;
+}
