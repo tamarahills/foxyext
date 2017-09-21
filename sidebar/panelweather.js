@@ -28,6 +28,7 @@ function initializeWeather(city, weather, temp, min, max, desc) {
 
   var subweatherdiv = document.getElementById('subweatherdiv');
   var currtempSpan = subweatherdiv.querySelector('.currtempfont');
+  document.getElementById("weatherImage").src = findProperWeatherImage(desc);
 
   var highlow = document.getElementById('highlowdiv');
   var highlowtempfontSpan = highlow.querySelector('.highlowtempfont');
@@ -36,5 +37,30 @@ function initializeWeather(city, weather, temp, min, max, desc) {
   descriptionSpan.innerHTML = desc;
   currtempSpan.innerHTML = Math.round(temp);
   highlowtempfontSpan.innerHTML = 'H: ' + Math.round(max) + ' L: ' + Math.round(min);
+}
 
+function findProperWeatherImage(weatherDesc) {
+  var imagefile = '';
+  var desc = weatherDesc.toLowerCase()
+  if (desc.indexOf('sun') !== -1) {
+      imageFile = './resources/sun.svg';
+  } else if (desc.indexOf('cloud') !== -1) {
+    imageFile = './resources/cloudy.svg';
+  } else if (desc.indexOf('rain') !== -1) {
+    imageFile = './resources/rain.svg';
+  } else if (desc.indexOf('snow') !== -1) {
+    imageFile = './resources/snow.svg';
+  } else if (desc.indexOf('rain') !== -1) {
+    imageFile = './resources/rain.svg';
+  } else if (desc.indexOf('wind') !== -1) {
+    imageFile = './resources/wind.svg';
+  } else if (desc.indexOf('clear') !== -1) {
+    imageFile = './resources/sun.svg';
+  } else {
+    // We should try and get an icon for
+    // 'haze', 'clear', and thunderstorm too
+    imageFile = './resources/cloudy.svg';
+  }
+
+  return imageFile;
 }
