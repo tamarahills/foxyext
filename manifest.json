@@ -30,7 +30,7 @@
       "default_icon": "icons/message.svg"
     },
 
-    "permissions": ["nativeMessaging",  "bookmarks", "tabs"],
+    "permissions": ["nativeMessaging",  "bookmarks", "tabs", "activeTab"],
 
     "commands": {
       "_execute_sidebar_action": {

@@ -1,4 +1,4 @@
-var myWindowId;
+var myWindowId, pocketuser, pocket_access_token, pocket_consumer_token;
 
 var port = browser.runtime.connectNative("foxycli");
 console.log('CONNECT NATIVE CALLED');
@@ -78,6 +78,22 @@ port.onMessage.addListener((response) => {
       iframe.height = 185;
       iframe.setAttribute("src", '/sidebar/paneliot.html?room='
         + response.param + '&onoff=' + response.param2);
+      break;
+    case 'POCKET':
+      iDiv.className = "pocketcardiv";
+      browser.tabs.query({ active: true})
+        .then((tabs) => {
+          port.postMessage(tabs[0].url);
+          console.log(tabs[0].url);
+        });
+      icon.src = './resources/get_pocket1600.png';
+      icon.height = 16;
+      icon.width = 16;
+
+      var iframe = sidebar.createElement('iframe');
+      iframe.frameBorder=0;
+      iframe.width = 300;
+      iframe.setAttribute("src", '/sidebar/panelpocket.html');
       break;
     default: //This is also 'NONE'. If we add another, may need to break it out
       iDiv.className = "confusedcardiv";
