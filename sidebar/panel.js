@@ -95,6 +95,17 @@ port.onMessage.addListener((response) => {
       iframe.width = 300;
       iframe.setAttribute("src", '/sidebar/panelpocket.html');
       break;
+    case 'NPR':
+      iDiv.className = "nprcardiv";
+      icon.src = './resources/npricon.svg';
+      icon.height = 16;
+      icon.width = 16;
+
+      var iframe = sidebar.createElement('iframe');
+      iframe.frameBorder=0;
+      iframe.width = 300;
+      iframe.setAttribute("src", '/sidebar/panelnpr.html');
+      break;
     default: //This is also 'NONE'. If we add another, may need to break it out
       iDiv.className = "confusedcardiv";
 
