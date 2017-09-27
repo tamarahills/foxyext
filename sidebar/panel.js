@@ -26,7 +26,7 @@ port.onMessage.addListener((response) => {
     case 'TIMER':
       iDiv.className = "timercardiv";
 
-      icon.src = "./resources/foxytimer.svg";
+      icon.src = "./resources/timer.svg";
 
       var iframe = sidebar.createElement('iframe');
       iframe.frameBorder=0;
