@@ -99,9 +99,10 @@ port.onMessage.addListener((response) => {
       break;
     case 'NPR':
       iDiv.className = "nprcardiv";
-      icon.src = './resources/npricon.svg';
-      icon.height = 16;
-      icon.width = 16;
+      // icon.src = './resources/npricon.svg';
+      icon.src = './resources/npricon.png';
+      icon.height = 20;
+      icon.width = 20;
 
       var iframe = sidebar.createElement('iframe');
       iframe.frameBorder=0;
