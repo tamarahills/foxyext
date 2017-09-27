@@ -41,7 +41,9 @@ port.onMessage.addListener((response) => {
     case 'SPOTIFY':
       iDiv.className = "spotifycardiv";
 
-      icon.src = "./resources/spotify.svg";
+      icon.src = "/sidebar/resources/Spotify_logo_without_text.svg";
+      icon.height = 16;
+      icon.width = 16;
 
       var iframe = sidebar.createElement('iframe');
       iframe.setAttribute("src", '/sidebar/spotify.html?playlist=' + response.param);
