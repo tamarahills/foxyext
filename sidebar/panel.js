@@ -67,7 +67,7 @@ port.onMessage.addListener((response) => {
     case 'IOT':
       iDiv.className = "iotcardiv";
       if(response.param2 == 'on') {
-        iDiv.style.backgroundImage = "url('resources/sunburst.png')";
+        // iDiv.style.backgroundImage = "url('resources/sunburst.png')";
       }
 
       icon.src = "./resources/foxyhome.svg";
