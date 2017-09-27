@@ -16,6 +16,8 @@ port.onMessage.addListener((response) => {
   // Attach the icon for the card.
   var icon = document.createElement('img');
   icon.style['margin-top']="3px";
+  icon.height = 16;
+  icon.width = 16;
 
   // Create the Speech text
   var text = document.createElement('span');
@@ -42,8 +44,6 @@ port.onMessage.addListener((response) => {
       iDiv.className = "spotifycardiv";
 
       icon.src = "/sidebar/resources/Spotify_logo_without_text.svg";
-      icon.height = 16;
-      icon.width = 16;
 
       var iframe = sidebar.createElement('iframe');
       iframe.setAttribute("src", '/sidebar/spotify.html?playlist=' + response.param);
@@ -55,8 +55,6 @@ port.onMessage.addListener((response) => {
     case 'WEATHER':
       iDiv.className = "weathercardiv";
       icon.src = findProperWeatherImage(response.param5);
-      icon.height = 16;
-      icon.width = 16;
 
       var iframe = sidebar.createElement('iframe');
       iframe.frameBorder=0;
@@ -83,23 +81,22 @@ port.onMessage.addListener((response) => {
       break;
     case 'POCKET':
       iDiv.className = "pocketcardiv";
-      browser.tabs.query({ active: true})
-        .then((tabs) => {
-          port.postMessage(tabs[0].url);
-          console.log(tabs[0].url);
-        });
       icon.src = './resources/get_pocket1600.png';
-      icon.height = 16;
-      icon.width = 16;
-
       var iframe = sidebar.createElement('iframe');
       iframe.frameBorder=0;
       iframe.width = 300;
-      iframe.setAttribute("src", '/sidebar/panelpocket.html');
+      iframe.style.paddingLeft = '11px';
+
+      browser.tabs.query({ active: true})
+        .then((tabs) => {
+          port.postMessage(tabs[0].url);
+          console.log('Before passing: ' + tabs[0].url);
+          iframe.setAttribute("src", '/sidebar/panelpocket.html?title=' +
+            tabs[0].title + '&source=' + tabs[0].url);
+        });
       break;
     case 'NPR':
       iDiv.className = "nprcardiv";
-      // icon.src = './resources/npricon.svg';
       icon.src = './resources/npricon.png';
       icon.height = 20;
       icon.width = 20;
