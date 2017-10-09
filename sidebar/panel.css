@@ -78,6 +78,7 @@ p {
   font-style: italic;
   color: #808080;
   margin-left: 5px;
+  vertical-align: text-top;
 }
 
 .iotSpeechtext {

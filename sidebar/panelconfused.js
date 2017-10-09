@@ -22,10 +22,11 @@ function initializeCard(text) {
   var explainSpan = explainDiv.querySelector('.explainMoreFont');
   var searchSpan = explainDiv.querySelector('.searchFont');
 
-  var searchUri = encodeURI('https://search.yahoo.com/search?p=' + text);
+  var searchUri = encodeURI('https://search.yahoo.com/search?p=' +
+    text.replace(/['"]+/g, ''));
 
   speechSpan.innerHTML = '"' + text + '"';
   explainSpan.innerHTML = 'You could try repeating the command or ' +
-   '<a href='+searchUri +'>Search the web for</a>' ;
-  searchSpan.innerHTML = ' "' + text + '"';
+   '<a href='+searchUri + ' target=\"_blank\">Search the web for</a>';
+  searchSpan.innerHTML =  text;
 }

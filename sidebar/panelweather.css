@@ -41,12 +41,20 @@ h1{
   font-size: 12px;
   color: #0F1126;
 }
+
 .weatherDescDiv {
   margin-top: -3px;
+  padding-left: 9px;
 }
 .weatheralign {
   display: block;
+  padding-left: 9px;
 }
 
-.subweatherdiv {
+.subweatherdivclass {
+  padding-left: 9px;
+}
+
+.highlowdivclass {
+  padding-left: 9px;
 }
