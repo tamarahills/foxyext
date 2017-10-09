@@ -16,6 +16,7 @@ port.onMessage.addListener((response) => {
   // Attach the icon for the card.
   var icon = document.createElement('img');
   icon.style['margin-top']="3px";
+  icon.style['margin-left']="3px";
   icon.height = 16;
   icon.width = 16;
 
@@ -89,7 +90,7 @@ port.onMessage.addListener((response) => {
 
       browser.tabs.query({ active: true})
         .then((tabs) => {
-          port.postMessage(tabs[0].url);
+          //port.postMessage(tabs[0].url);
           console.log('Before passing: ' + tabs[0].url);
           iframe.setAttribute("src", '/sidebar/panelpocket.html?title=' +
             tabs[0].title + '&source=' + tabs[0].url);
@@ -108,6 +109,7 @@ port.onMessage.addListener((response) => {
       break;
     default: //This is also 'NONE'. If we add another, may need to break it out
       iDiv.className = "confusedcardiv";
+      text.textContent = response.utterance.replace(/['"]+/g, '');
 
       var iframe = sidebar.createElement('iframe');
       iframe.frameBorder=0;

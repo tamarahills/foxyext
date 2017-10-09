@@ -16,6 +16,7 @@ body {
   color: #0F1126;
   display: block;
   padding-top: 5px;
+  padding-right: 15px;
 }
 
 .pocketSourceFont {
@@ -24,4 +25,8 @@ body {
   display: block;
   font-style: italic;
   padding-top: 5px;
+}
+
+.pocketListDivClass {
+  padding-left: 5px;
 }
