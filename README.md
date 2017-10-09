@@ -7,6 +7,11 @@ Note: foxycli must be installed before the extension can function properly.
 
 The Web Extension needs to be configured for the NativeMessaging to be able to find and start the native app (in this case, foxycli).
 
+First, clone this repo:
+```
+$ git clone https://github.com/tamarahills/foxyext.git
+```
+
 1.  Modify foxycli.json paths to point to the correct location for where you have foxycli installed.  The startup.sh script launches the client processes.
 2.  Place foxycli.json in the location: /Library/Application Support/Mozilla/NativeMessagingHosts/foxycli.json
 
@@ -14,4 +19,4 @@ The FoxyExt can be started by:
 1.  Go to about:debugging in Firefox.  
 2.  Click on "Add-ons" on the left side.
 3.  Check "Enable Add-on Debugging" if it's not already checked.
-4.  Choose "Load Temporary Add-on" and then browse to foxyext and select any file and it will start the extension and the native app foxycli.
+4.  Choose "Load Temporary Add-on" and then browse to foxyext and select manifest.json and it will start the extension and the native app foxycli.
