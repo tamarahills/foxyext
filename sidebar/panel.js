@@ -1,4 +1,5 @@
-var myWindowId, pocketuser, pocket_access_token, pocket_consumer_token;
+var myWindowId, pocketuser, pocket_access_token, pocket_consumer_token, 
+  ga_uuid, ga_property, ga_visitor;
 
 var port = browser.runtime.connectNative("foxycli");
 console.log('CONNECT NATIVE CALLED');
@@ -106,6 +107,11 @@ port.onMessage.addListener((response) => {
       iframe.frameBorder=0;
       iframe.width = 300;
       iframe.setAttribute("src", '/sidebar/panelnpr.html');
+      break;
+    case 'GA':
+      console.log('got GA request!!!');
+      ga_property = response.param;
+      ga_uuid = response.param2;
       break;
     default: //This is also 'NONE'. If we add another, may need to break it out
       iDiv.className = "confusedcardiv";
