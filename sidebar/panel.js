@@ -10,10 +10,10 @@ Listen for messages from the app.
 port.onMessage.addListener((response) => {
   console.log('RECEIVED APP MESSAGE');
   console.log("Received: " + JSON.stringify(response));
-
+  
   var sidebar = getSidebar();
   var iDiv = sidebar.createElement('div');
-
+  
   // Attach the icon for the card.
   var icon = document.createElement('img');
   icon.style['margin-top']="3px";
@@ -132,10 +132,11 @@ port.onMessage.addListener((response) => {
     iDiv.appendChild(text);
 
   iDiv.appendChild(iframe);
-
-  if (sidebar.body.hasChildNodes()) {
-    var firstChild = sidebar.body.firstChild;
-    var insertedNode = sidebar.body.insertBefore(iDiv, firstChild);
+  
+  var tb = sidebar.getElementById('toolbar');
+  var firstCard = tb.nextSibling;
+  if (firstCard) {
+    var insertedNode = sidebar.body.insertBefore(iDiv, firstCard);
   } else {
     sidebar.body.appendChild(iDiv);
   }
@@ -184,6 +185,21 @@ function findProperWeatherImage(weatherDesc) {
   return imageFile;
 }
 
+function deleteCards() {
+  var sidebar = getSidebar();
+  console.log('sidebar is:' + sidebar);
+  if (sidebar.body.hasChildNodes()) {
+    var children = sidebar.body.childNodes;
+    var tb = '';
+    while (sidebar.body.firstChild) {
+      var temp = sidebar.body.removeChild(sidebar.body.firstChild);
+      if (temp.id == 'toolbar') {
+        tb = temp;
+      }
+    }
+    sidebar.body.appendChild(tb);
+  }
+}
 
 /*
 When the sidebar loads, get the ID of its window,
@@ -191,4 +207,10 @@ and update its content.
 */
 browser.windows.getCurrent({populate: true}).then((windowInfo) => {
   myWindowId = windowInfo.id;
+
+  var sidebar = getSidebar();
+  var btn = sidebar.getElementById('clear_button');
+  btn.addEventListener('click', function(){
+    deleteCards();
+  });
 });
