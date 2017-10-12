@@ -1,5 +1,5 @@
 var myWindowId, pocketuser, pocket_access_token, pocket_consumer_token, 
-  ga_uuid, ga_property, ga_visitor;
+  ga_uuid, ga_property, ga_visitor, mute_state;
 
 var port = browser.runtime.connectNative("foxycli");
 console.log('CONNECT NATIVE CALLED');
@@ -209,8 +209,20 @@ browser.windows.getCurrent({populate: true}).then((windowInfo) => {
   myWindowId = windowInfo.id;
 
   var sidebar = getSidebar();
-  var btn = sidebar.getElementById('clear_button');
-  btn.addEventListener('click', function(){
+  var deleteBtn = sidebar.getElementById('clear_button');
+  deleteBtn.addEventListener('click', function(){
     deleteCards();
+  });
+
+  mute_state = false;
+  var muteBtn = sidebar.getElementById('mute_button');
+  muteBtn.addEventListener('click', function() {
+    if (!mute_state) {
+      muteBtn.style.backgroundImage = "url('resources/unmute.png')";
+    } else {
+      muteBtn.style.backgroundImage = "url('resources/mute.png')";
+    }
+    mute_state = !mute_state;
+    console.log('mute button pushed');
   });
 });

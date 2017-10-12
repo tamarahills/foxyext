@@ -28,6 +28,13 @@ div#toolbar {
   background-size: cover;
 }
 
+#mute_button {
+  width: 30px;
+  height: 30px;
+  background-image: url('resources/mute.png');
+  background-size: cover;
+}
+
 .confusedcardiv {
   background-color: #FFFFFF;
   width: 275px;
