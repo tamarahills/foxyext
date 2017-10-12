@@ -16,6 +16,18 @@ p {
   margin: 1em 2em;
 }
 
+div#toolbar {
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+#clear_button {
+  width: 30px;
+  height: 30px;
+  background-image: url('resources/trashcan.png');
+  background-size: cover;
+}
+
 .confusedcardiv {
   background-color: #FFFFFF;
   width: 275px;
