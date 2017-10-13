@@ -91,6 +91,14 @@ div#toolbar {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
 }
 
+.feedbackcardiv {
+  background-color: #FFFFFF;
+  width: 275px;
+  height: 80px;
+  margin: 2px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
+}
+
 .speechtext {
   padding-top: 8px;
   font-size: 10px;

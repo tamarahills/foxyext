@@ -113,6 +113,17 @@ port.onMessage.addListener((response) => {
       ga_property = response.param;
       ga_uuid = response.param2;
       break;
+    case 'FEEDBACK':
+      icon.src = './resources/Check_mark.png';
+      icon.height = 20;
+      icon.width = 20;
+      iDiv.className = 'feedbackcardiv';
+
+      var iframe = sidebar.createElement('iframe');
+      iframe.frameBorder=0;
+      iframe.width = 300;
+      iframe.setAttribute("src", '/sidebar/panelfeedback.html');
+      break;
     default: //This is also 'NONE'. If we add another, may need to break it out
       iDiv.className = "confusedcardiv";
       text.textContent = response.utterance.replace(/['"]+/g, '');
