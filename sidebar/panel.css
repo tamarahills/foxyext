@@ -10,6 +10,7 @@ body {
   font: caption;
   background-color: #FFFFFF;
   overflow: scroll;
+  padding: 0 10px;
 }
 
 p {
