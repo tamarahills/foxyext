@@ -3,15 +3,19 @@ html, body {
   width: 100%;
   margin: 0;
   box-sizing: border-box;
+  font-family: -apple-system, sans-serif;
 }
 
 body {
   height: 90%;
-  font: caption;
   background-color: #FFFFFF;
   overflow: scroll;
+  padding: 0 10px;
 }
 
+* {
+  box-sizing: border-box;
+}
 p {
   margin: 1em 2em;
 }
@@ -70,7 +74,7 @@ div#toolbar {
 .timercardiv {
   background-color: #FFFFFF;
   width: 275px;
-  height: 120px;
+  /* height: 120px; */
   margin: 2px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
 }
@@ -83,10 +87,11 @@ div#toolbar {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
 }
 
-.iotcardiv {
+.iotcardiv,
+.iotcardiv-off {
   background-color: #FFFFFF;
   width: 275px;
-  height: 200px;
+  height: 209px;
   margin: 2px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
 }
@@ -99,8 +104,20 @@ div#toolbar {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
 }
 
+.protipcardiv{
+  height: 97px;
+  background-color: #fffcd9!important;
+}
+
+.protip-bold{
+  font-weight: 800;
+  font-style: normal!important;
+  color: #000!important;
+  font-size: 11px!important;
+}
+
 .speechtext {
-  padding-top: 8px;
+  padding-top: 2px;
   font-size: 10px;
   font-style: italic;
   color: #808080;
@@ -109,9 +126,49 @@ div#toolbar {
 }
 
 .iotSpeechtext {
-  padding-top: 8px;
+  padding-top: 2px;
   font-size: 10px;
   font-style: italic;
   color: #808080;
   margin-left: 5px;
+}
+
+.panel-item {
+  position: relative;
+  background-color: #FFFFFF;
+  margin: 2px;
+  margin-top: 8px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
+  width: 275px;
+}
+.panel-item-header {
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+  padding: 8px 6px 4px 8px;
+  display: flex;
+  flex-direction: row;
+}
+.panel-item-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.panel-item-thumb {
+  height: 16px;
+  width: 16px;
+  display: inline-block;
+  overflow: hidden;
+  margin-right: 6px;
+  flex: 0 0 auto;
+}
+.panel-item-thumb img {
+  max-width: 100%;
+}
+.panel-item-close {
+  margin-left: auto;
+  opacity: 0.5;
+}
+.panel-item-close:hover {
+  opacity: 1;
 }

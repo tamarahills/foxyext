@@ -1,7 +1,8 @@
 body{
   text-align: left;
-  font-family: sans-serif;
-  padding-left: 8px;
+  font-family: -apple-system, sans-serif;
+  margin: 0px;
+  margin-top: 25px;
 }
 
 h1{
@@ -25,11 +26,12 @@ h1{
 }
 
 .degreesFont {
-  font-size: 15px;
+  font-size: 11px;
   color: #0F1126;
-  font-weight: bold;
-  margin-left: -8px;
-  vertical-align: top;
+  position: absolute;
+  top: 71px;
+  display: inline-block;
+  margin-left: 2px;
 }
 
 .highlowtempfont {
@@ -44,17 +46,12 @@ h1{
 
 .weatherDescDiv {
   margin-top: -3px;
-  padding-left: 9px;
+  padding-left: 28px;
 }
-.weatheralign {
+.weatheralign,
+.subweatherdivclass,
+.highlowdivclass,
+.weatherDescDiv {
   display: block;
-  padding-left: 9px;
-}
-
-.subweatherdivclass {
-  padding-left: 9px;
-}
-
-.highlowdivclass {
-  padding-left: 9px;
+  padding-left: 35px;
 }
