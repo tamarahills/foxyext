@@ -13,6 +13,7 @@ body{
 .graphicLightDiv {
   text-align: center;
   background-image: url("resources/sunburst.png");
+  background-position: bottom center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
