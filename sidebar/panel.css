@@ -90,7 +90,7 @@ div#toolbar {
 .iotcardiv {
   background-color: #FFFFFF;
   width: 275px;
-  height: 200px;
+  height: 209px;
   margin: 2px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
 }
@@ -119,20 +119,27 @@ div#toolbar {
   color: #808080;
   margin-left: 5px;
 }
+
 .panel-item {
   position: relative;
+  background-color: #FFFFFF;
+  margin: 2px;
+  margin-top: 8px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
+  width: 275px;
 }
 .panel-item-header {
   position: absolute;
   width: 100%;
   z-index: 2;
-  padding: 8px 6px 4px;
+  padding: 8px 6px 4px 8px;
   display: flex;
   flex-direction: row;
 }
 .panel-item-frame {
   position: relative;
   width: 100%;
+  height: 100%;
 }
 .panel-item-thumb {
   height: 16px;
