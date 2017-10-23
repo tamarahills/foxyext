@@ -26,10 +26,13 @@ port.onMessage.addListener((response) => {
   text.setAttribute("class","speechtext");
   text.textContent = response.utterance;
 
+  let ID;
+  let template;
+
   switch(response.cmd) {
     case 'TIMER':
-      const ID = 'timercardiv';
-      const template = `
+      ID = 'timercardiv';
+      template = `
         <div class="panel-item-header">
           <div class="panel-item-thumb">
             <img src="resources/timer.svg" alt="">
@@ -158,10 +161,13 @@ port.onMessage.addListener((response) => {
 
   iDiv.appendChild(iframe);
 
-  iDiv.querySelector('.panel-item-close').addEventListener('click', function(e) {
-    e.preventDefault();
-    deleteCard(iDiv);
-  }, false);
+  var closeButton = iDiv.querySelector('.panel-item-close');
+  if (closeButton) {
+    closeButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      deleteCard(iDiv);
+    }, false);
+  }
   
   var tb = sidebar.getElementById('toolbar');
   var firstCard = tb.nextSibling;
