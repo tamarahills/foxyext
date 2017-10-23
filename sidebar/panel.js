@@ -28,12 +28,26 @@ port.onMessage.addListener((response) => {
 
   switch(response.cmd) {
     case 'TIMER':
-      iDiv.className = "timercardiv";
+      const ID = 'timercardiv';
+      const template = `
+        <div class="panel-item-header">
+          <div class="panel-item-thumb">
+            <img src="resources/timer.svg" alt="">
+          </div>
+          <span class="speechtext">${response.utterance}</span>
+          <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt=""></a>
+        </div>
+      `;
+      iDiv.innerHTML = template;
+      iDiv.className = `${ID} panel-item`;
 
-      icon.src = "./resources/timer.svg";
+      icon = '';
+      text = '';
 
       var iframe = sidebar.createElement('iframe');
-      iframe.frameBorder=0;
+      iframe.frameBorder = 0;
+      iframe.className = 'panel-item-frame';
+
       if (response.param2) {
         iframe.setAttribute("src", '/sidebar/paneltimer.html?duration='
           + response.param + '&tag=' + response.param2);
@@ -143,6 +157,11 @@ port.onMessage.addListener((response) => {
     iDiv.appendChild(text);
 
   iDiv.appendChild(iframe);
+
+  iDiv.querySelector('.panel-item-close').addEventListener('click', function(e) {
+    e.preventDefault();
+    deleteCard(iDiv);
+  }, false);
   
   var tb = sidebar.getElementById('toolbar');
   var firstCard = tb.nextSibling;
@@ -210,6 +229,10 @@ function deleteCards() {
     }
     sidebar.body.appendChild(tb);
   }
+}
+
+function deleteCard(node) {
+  node.parentNode.removeChild(node);
 }
 
 /*
