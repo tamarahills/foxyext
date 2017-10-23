@@ -1,11 +1,26 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', init);
+
+var timeinterval;
+
+function init() {
   var duration = getParameterByName('duration');
   console.log('Duration is:' + duration);
   var tag = getParameterByName('tag');
   console.log('tag is:' + tag);
   var deadline = new Date(Date.parse(new Date()) + duration * 1000);
   initializeClock('clockdiv', deadline, tag);
-});
+  
+  document.querySelector('.btn-reset').addEventListener('click', function(e) {
+    e.preventDefault();
+    var deadline = new Date(Date.parse(new Date()) + duration * 1000);
+    initializeClock('clockdiv', deadline, tag);
+  }, false);
+
+  document.querySelector('.btn-stop').addEventListener('click', function(e) {
+    e.preventDefault();
+    initializeClock('clockdiv', new Date(), tag);
+  }, false);
+}
 
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
@@ -33,6 +48,7 @@ function getTimeRemaining(endtime) {
 }
 
 function initializeClock(id, endtime, tag) {
+  clearInterval(timeinterval);
   var clock = document.getElementById(id);
   var minute = clock.querySelector('minutediv');
   var second = clock.querySelector('seconddiv');
@@ -58,5 +74,5 @@ function initializeClock(id, endtime, tag) {
   }
 
   updateClock();
-  var timeinterval = setInterval(updateClock, 1000);
+  timeinterval = setInterval(updateClock, 1000);
 }
