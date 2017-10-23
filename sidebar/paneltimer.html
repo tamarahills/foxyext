@@ -1,27 +1,29 @@
 <!doctype html>
 <html>
-  <head>
-     <meta charset="UTF-8">
-    <title>Foxy Timer</title>
-    <script src="paneltimer.js"></script>
-    <link rel="stylesheet" type="text/css" href="paneltimer.css">
-  </head>
-  <body>
-    <div id="clockdiv" class="clockclass">
-      <div id="minutediv" class="minuteclass">
-        <span class="minutefont">test</span>
-      </div>
-      <div id="seconddiv" class="secondclass">
-        <span class="secondfont">test</span>
-      </div>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Foxy Timer</title>
+  <link rel="stylesheet" type="text/css" href="paneltimer.css">
+</head>
+
+<body>
+  <div id="clockdiv" class="clockclass">
+    <div id="minutediv" class="minuteclass">
+      <span class="minutefont">test</span>
     </div>
-    <div class="progress">
-      <div class="progres-line progres-line--done"></div>
+    <div id="seconddiv" class="secondclass">
+      <span class="secondfont">test</span>
     </div>
-    <div class="controls">
-      <a href="/" class="btn ">Reset</a>
-      <a href="/" class="btn btn-blue">Stop</a>
-      <a href="/" class="btn btn-blue">Restart</a>
-    </div>
-  </body>
+  </div>
+  <div class="progress">
+    <div class="progres-line progres-line--done"></div>
+  </div>
+  <div class="controls">
+    <a href="/" class="btn btn-reset">Reset</a>
+    <a href="/" class="btn btn-blue btn-stop">Stop</a>
+  </div>
+  <script src="paneltimer.js"></script>
+</body>
+
 </html>
