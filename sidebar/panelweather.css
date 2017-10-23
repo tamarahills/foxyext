@@ -30,6 +30,7 @@ h1{
   position: absolute;
   top: 45px;
   display: inline-block;
+  margin-left: 5px;
 }
 
 .highlowtempfont {
