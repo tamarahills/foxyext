@@ -16,10 +16,6 @@
       }
     },
 
-    "background": {
-      "scripts": ["background.js"]
-    },
-
     "sidebar_action": {
       "default_icon": "icons/Foxy-SF.svg",
       "default_title" : "Hey Foxy",
