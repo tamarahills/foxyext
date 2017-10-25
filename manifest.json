@@ -26,7 +26,7 @@
       "default_icon": "icons/message.svg"
     },
 
-    "permissions": ["nativeMessaging",  "bookmarks", "tabs", "activeTab"],
+    "permissions": ["nativeMessaging",  "bookmarks", "tabs", "activeTab", "<all_urls>"],
 
     "commands": {
       "_execute_sidebar_action": {
