@@ -72,8 +72,21 @@ port.onMessage.addListener((response) => {
       iframe.scrolling = "no";
       break;
     case 'WEATHER':
-      iDiv.className = "weathercardiv";
-      icon.src = findProperWeatherImage(response.param5);
+      ID = 'weathercardiv';
+      template = `
+        <div class="panel-item-header">
+          <div class="panel-item-thumb">
+            <img src="${findProperWeatherImage(response.param5)}" alt="">
+          </div>
+          <span class="speechtext">${response.utterance}</span>
+          <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt=""></a>
+        </div>
+      `;
+      iDiv.innerHTML = template;
+      iDiv.className = `${ID} panel-item`;
+
+      icon = '';
+      text = '';
 
       var iframe = sidebar.createElement('iframe');
       iframe.frameBorder=0;
