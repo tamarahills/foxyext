@@ -5,8 +5,10 @@ document.addEventListener('DOMContentLoaded', function () {
   var min = getParameterByName('min');
   var max = getParameterByName('max');
   var desc = getParameterByName('description');
+  var localTime = getParameterByName('time');
+  var localDay = getParameterByName('day');
 
-  initializeWeather(city, weather, temp, min, max, desc);
+  initializeWeather(city, weather, temp, min, max, desc, localTime, localDay);
 });
 
 function getParameterByName(name, url) {
@@ -19,7 +21,7 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-function initializeWeather(city, weather, temp, min, max, desc) {
+function initializeWeather(city, weather, temp, min, max, desc, localTime, localDay) {
   var weather = document.getElementById('weatherdiv');
   var citySpan = weather.querySelector('.cityfont');
 
@@ -34,7 +36,7 @@ function initializeWeather(city, weather, temp, min, max, desc) {
   var highlowtempfontSpan = highlow.querySelector('.highlowtempfont');
 
   citySpan.innerHTML = city;
-  descriptionSpan.innerHTML = desc;
+  descriptionSpan.innerHTML = `${localDay}, ${localTime} - ${desc}`;
   currtempSpan.innerHTML = Math.round(temp);
   highlowtempfontSpan.innerHTML = 'H: ' + Math.round(max) + ' L: ' + Math.round(min);
 }
