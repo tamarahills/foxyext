@@ -88,6 +88,7 @@ port.onMessage.addListener((response) => {
       icon = '';
       text = '';
 
+      var localTime = response.localTime || {};
       var iframe = sidebar.createElement('iframe');
       iframe.frameBorder=0;
       iframe.width = 300;
@@ -95,7 +96,7 @@ port.onMessage.addListener((response) => {
         + response.param + '&weather=' + response.param5 + '&temp=' +
         + response.param2 + '&min=' + response.param3 + '&max=' +
         + response.param4 + '&description=' + response.param5
-        + '&time=' + response.localTime.time + '&day=' + response.localTime.day);
+        + '&time=' + localTime.time + '&day=' + localTime.day);
       break;
     case 'IOT':
       iDiv.className = "iotcardiv";
