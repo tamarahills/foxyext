@@ -50,17 +50,14 @@ body{
   position: relative;
 }
 
-.progres-line {
+#progres-line {
   background-color: #0675d3;
   position: absolute;
   left: -1px;
   right: -1px;
   top: -1px;
   height: 3px;
-  width: auto;
-}
-.progres-line--done {
-  background-color: #30e60b;
+  width: 0%;
 }
 
 .controls {
