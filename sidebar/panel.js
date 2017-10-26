@@ -88,13 +88,15 @@ port.onMessage.addListener((response) => {
       icon = '';
       text = '';
 
+      var localTime = response.localTime || {};
       var iframe = sidebar.createElement('iframe');
       iframe.frameBorder=0;
       iframe.width = 300;
       iframe.setAttribute("src", '/sidebar/panelweather.html?city='
         + response.param + '&weather=' + response.param5 + '&temp=' +
         + response.param2 + '&min=' + response.param3 + '&max=' +
-        + response.param4 + '&description=' + response.param5);
+        + response.param4 + '&description=' + response.param5
+        + '&time=' + localTime.time + '&day=' + localTime.day);
       break;
     case 'IOT':
       iDiv.className = "iotcardiv";
@@ -156,6 +158,7 @@ port.onMessage.addListener((response) => {
       break;
     default: //This is also 'NONE'. If we add another, may need to break it out
       iDiv.className = "confusedcardiv";
+      iDiv.innerHTML = '<a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right;"></a>';
       text.textContent = response.utterance.replace(/['"]+/g, '');
 
       var iframe = sidebar.createElement('iframe');
