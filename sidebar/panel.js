@@ -156,6 +156,7 @@ port.onMessage.addListener((response) => {
       break;
     default: //This is also 'NONE'. If we add another, may need to break it out
       iDiv.className = "confusedcardiv";
+      iDiv.innerHTML = '<a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right;"></a>';
       text.textContent = response.utterance.replace(/['"]+/g, '');
 
       var iframe = sidebar.createElement('iframe');
