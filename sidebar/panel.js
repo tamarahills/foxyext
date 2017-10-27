@@ -257,6 +257,38 @@ function deleteCard(node) {
   node.parentNode.removeChild(node);
 }
 
+function showHelp() {
+  var template = `
+  <div class="panel-item-header">
+    <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt=""></a>
+  </div>
+`;
+var sidebar = getSidebar();
+var iDiv = sidebar.createElement('div');
+iDiv.innerHTML = template;
+iDiv.className = 'helpcardiv panel-item';
+var iframe = sidebar.createElement('iframe');
+iframe.setAttribute("src", '/sidebar/panelhelp.html');
+iframe.frameBorder=0;
+iframe.width = '99%';
+iframe.height = '100%';
+iDiv.appendChild(iframe);
+var tb = sidebar.getElementById('toolbar');
+var firstCard = tb.nextSibling;
+if (firstCard) {
+  var insertedNode = sidebar.body.insertBefore(iDiv, firstCard);
+} else {
+  sidebar.body.appendChild(iDiv);
+}
+var closeButton = iDiv.querySelector('.panel-item-close');
+if (closeButton) {
+  closeButton.addEventListener('click', function(e) {
+    e.preventDefault();
+    deleteCard(iDiv);
+  }, false);
+};
+};
+
 /*
 When the sidebar loads, get the ID of its window,
 and update its content.
@@ -269,6 +301,11 @@ browser.windows.getCurrent({populate: true}).then((windowInfo) => {
   deleteBtn.addEventListener('click', function(){
     deleteCards();
   });
+
+  var helpBtn = sidebar.getElementById('help_button');
+  helpBtn.addEventListener('click', function(){
+    showHelp();
+  }); 
 
   mute_state = false;
   var muteBtn = sidebar.getElementById('mute_button');
