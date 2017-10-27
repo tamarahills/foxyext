@@ -31,6 +31,17 @@ body{
 
 .secondfont {
   font-size: 36px;
+<<<<<<< HEAD
+  color: #0F1126;
+  font-weight: bold;
+  padding: 0 !important;
+}
+
+.doneclass {
+  display: inline-block;
+  font-size: 36px;
+=======
+>>>>>>> 3c09bd8fab0a4456a519286963e440aec2c26d52
   color: #0F1126;
   font-weight: bold;
   padding: 0 !important;
@@ -41,6 +52,51 @@ body{
   font-size: 36px;
   color: #0F1126;
   font-weight: bold;
+}
+
+.progress {
+  margin: 0 30px;
+  height: 1px;
+  border: 1px solid #c6c6c6;
+  position: relative;
+}
+
+#progres-line {
+  background-color: #0675d3;
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  top: -1px;
+  height: 3px;
+  width: 0%;
+}
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  margin-top: 24px;
+}
+
+.btn {
+  height: 30px;
+  flex: 1 1 50%;
+  background-color: #f2f2f2;
+  border-top: 1px solid #d4d4d4;
+  font-size: 12px;
+  line-height: 30px;
+  text-align: center;
+  color: #000;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #d4d4d4;
+}
+
+.btn-blue {
+  background-color: #0996f8;
+  border-top: 1px solid #0675d3;
+  color: #fff;
 }
 
 .progress {
