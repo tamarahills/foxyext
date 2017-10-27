@@ -4,6 +4,9 @@ body{
     font-weight: 100;
   }
   
+  #foxyTextDiv {
+    padding-top: 22px;
+  }
   
   .feedbackFont {
     font-size: 15px;
