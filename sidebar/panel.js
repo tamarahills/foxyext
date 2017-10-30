@@ -1,5 +1,5 @@
 var myWindowId, pocketuser, pocket_access_token, pocket_consumer_token, 
-  ga_uuid, ga_property, ga_visitor, mute_state;
+  ga_uuid, ga_property, ga_visitor, mute_state, help_visible;
 
 var port = browser.runtime.connectNative("foxycli");
 console.log('CONNECT NATIVE CALLED');
@@ -304,7 +304,8 @@ function deleteCard(node) {
   node.parentNode.removeChild(node);
 }
 
-function showHelp() {
+function showHelp(help_visible) {
+  if (help_visible) {
   var template = `
   <div class="panel-item-header">
     <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt=""></a>
@@ -334,6 +335,10 @@ if (closeButton) {
     deleteCard(iDiv);
   }, false);
 };
+} else {
+  deleteCard(getSidebar().querySelector('.helpcardiv'));
+}
+
 };
 
 /*
@@ -349,9 +354,11 @@ browser.windows.getCurrent({populate: true}).then((windowInfo) => {
     deleteCards();
   });
 
+  help_visible = false;
   var helpBtn = sidebar.getElementById('help_button');
   helpBtn.addEventListener('click', function(){
-    showHelp();
+    help_visible = !help_visible;
+    showHelp(help_visible);
   }); 
 
   mute_state = false;
