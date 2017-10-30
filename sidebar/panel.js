@@ -114,8 +114,20 @@ port.onMessage.addListener((response) => {
         + response.param + '&onoff=' + response.param2);
       break;
     case 'POCKET':
-      iDiv.className = "pocketcardiv";
-      icon.src = './resources/get_pocket1600.png';
+    template = `
+    <div class="panel-item-header">
+    <img src="./resources/get_pocket1600.png" height="20" width="20"
+    style="vertical-align: middle;">
+    <span class="speechtext">${response.utterance}</span>
+    <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right"></a>
+    </div>
+    `;
+    
+      icon = '';
+      text = '';
+      iDiv.innerHTML = template;
+      iDiv.className = "pocketcardiv panel-item";
+     // icon.src = './resources/get_pocket1600.png';
       var iframe = sidebar.createElement('iframe');
       iframe.frameBorder=0;
       iframe.width = 300;
@@ -130,10 +142,18 @@ port.onMessage.addListener((response) => {
         });
       break;
     case 'NPR':
-      iDiv.className = "nprcardiv";
-      icon.src = './resources/npricon.png';
-      icon.height = 20;
-      icon.width = 20;
+    template = `
+    <div class="panel-item-header">
+    <img src="./resources/npricon.png" height="20" width="20"
+    style="vertical-align: middle;">
+    <span class="speechtext">${response.utterance}</span>
+    <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right"></a>
+    </div>
+    `;    
+      icon = '';
+      text = '';
+      iDiv.innerHTML = template;
+      iDiv.className = "nprcardiv panel-item";
 
       var iframe = sidebar.createElement('iframe');
       iframe.frameBorder=0;
@@ -146,10 +166,21 @@ port.onMessage.addListener((response) => {
       ga_uuid = response.param2;
       break;
     case 'FEEDBACK':
-      icon.src = './resources/Check_mark.png';
-      icon.height = 20;
-      icon.width = 20;
-      iDiv.className = 'feedbackcardiv';
+    template = `
+    <div class="panel-item-header">
+    <img src="./resources/Check_mark.png" height="20" width="20"
+    style="vertical-align: middle;">
+    <span class="speechtext">${response.utterance}</span>
+    <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right"></a>
+    </div>
+    `;    
+      icon = '';
+      text = '';
+      iDiv.innerHTML = template;
+      // icon.src = './resources/Check_mark.png';
+      // icon.height = 20;
+      // icon.width = 20;
+      iDiv.className = 'feedbackcardiv panel-item';
 
       var iframe = sidebar.createElement('iframe');
       iframe.frameBorder=0;
@@ -157,8 +188,15 @@ port.onMessage.addListener((response) => {
       iframe.setAttribute("src", '/sidebar/panelfeedback.html');
       break;
     default: //This is also 'NONE'. If we add another, may need to break it out
-      iDiv.className = "confusedcardiv";
-      iDiv.innerHTML = '<a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right;"></a>';
+    template = `
+    <div class="panel-item-header">
+    <img src="./resources/confused.svg" height="20" width="20"
+    style="vertical-align: middle;">
+    <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right"></a>
+    </div>
+    `;
+      iDiv.className = "confusedcardiv panel-item";
+      iDiv.innerHTML = template;
       text.textContent = response.utterance.replace(/['"]+/g, '');
 
       var iframe = sidebar.createElement('iframe');
@@ -257,6 +295,38 @@ function deleteCard(node) {
   node.parentNode.removeChild(node);
 }
 
+function showHelp() {
+  var template = `
+  <div class="panel-item-header">
+    <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt=""></a>
+  </div>
+`;
+var sidebar = getSidebar();
+var iDiv = sidebar.createElement('div');
+iDiv.innerHTML = template;
+iDiv.className = 'helpcardiv panel-item';
+var iframe = sidebar.createElement('iframe');
+iframe.setAttribute("src", '/sidebar/panelhelp.html');
+iframe.frameBorder=0;
+iframe.width = '99%';
+iframe.height = '100%';
+iDiv.appendChild(iframe);
+var tb = sidebar.getElementById('toolbar');
+var firstCard = tb.nextSibling;
+if (firstCard) {
+  var insertedNode = sidebar.body.insertBefore(iDiv, firstCard);
+} else {
+  sidebar.body.appendChild(iDiv);
+}
+var closeButton = iDiv.querySelector('.panel-item-close');
+if (closeButton) {
+  closeButton.addEventListener('click', function(e) {
+    e.preventDefault();
+    deleteCard(iDiv);
+  }, false);
+};
+};
+
 /*
 When the sidebar loads, get the ID of its window,
 and update its content.
@@ -269,6 +339,11 @@ browser.windows.getCurrent({populate: true}).then((windowInfo) => {
   deleteBtn.addEventListener('click', function(){
     deleteCards();
   });
+
+  var helpBtn = sidebar.getElementById('help_button');
+  helpBtn.addEventListener('click', function(){
+    showHelp();
+  }); 
 
   mute_state = false;
   var muteBtn = sidebar.getElementById('mute_button');
