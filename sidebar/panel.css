@@ -39,6 +39,21 @@ div#toolbar {
   background-size: cover;
 }
 
+#help_button {
+  width: 30px;
+  height: 30px;
+  background-image: url('resources/help.png');
+  background-size: cover;
+}
+
+.helpcardiv {
+  background-color: #FFFFFF;
+  width: 275px;
+  height: 280px;
+  margin: 2px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
+}
+
 .confusedcardiv {
   background-color: #FFFFFF;
   width: 275px;
