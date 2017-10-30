@@ -60,9 +60,18 @@ port.onMessage.addListener((response) => {
       }
       break;
     case 'SPOTIFY':
-      iDiv.className = "spotifycardiv";
-
-      icon.src = "/sidebar/resources/Spotify_logo_without_text.svg";
+    template = `
+    <div class="panel-item-header">
+    <img src="./resources/Spotify_logo_without_text.svg" height="20" width="20"
+    style="vertical-align: middle;">
+    <span class="speechtext">${response.utterance}</span>
+    <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right"></a>
+    </div>
+    `;    
+      icon = '';
+      text = '';
+      iDiv.innerHTML = template;
+      iDiv.className = "spotifycardiv panel-item";
 
       var iframe = sidebar.createElement('iframe');
       iframe.setAttribute("src", '/sidebar/spotify.html?playlist=' + response.param);
