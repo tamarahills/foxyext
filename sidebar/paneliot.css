@@ -1,22 +1,33 @@
+html,
+body{
+  height: 100%;
+}
+
 html {
   overflow-y: hidden;
 }
 
-body {
-  /*background-image: "resources/sunburst.png";*/
-  padding-right: 50px;
-  margin-left: 0;
+body{
+  margin: 0;
 }
-
 .graphicLightDiv {
   text-align: center;
+  background-image: url("resources/sunburst.png");
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  padding-top: 30px;
+}
+
+.graphicLightDiv--off{
+  background-image: none;
+  background-color: #fff;
 }
 
 .lightOn {
   margin:  auto;
   display: block;
-  height: "60";
-  width: "60";
 }
 
 .roomFont {
@@ -25,4 +36,5 @@ body {
   font-weight: bold;
   font-family: sans-serif;
   display: inline-block;
+  margin-top: 8px;
 }

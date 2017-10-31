@@ -1,11 +1,29 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', init);
+
+var timeinterval;
+
+function init() {
   var duration = getParameterByName('duration');
   console.log('Duration is:' + duration);
   var tag = getParameterByName('tag');
   console.log('tag is:' + tag);
   var deadline = new Date(Date.parse(new Date()) + duration * 1000);
   initializeClock('clockdiv', deadline, tag);
-});
+  moveProgress.startProgress(duration * 10);
+  
+  document.querySelector('.btn-reset').addEventListener('click', function(e) {
+    e.preventDefault();
+    var deadline = new Date(Date.parse(new Date()) + duration * 1000);
+    initializeClock('clockdiv', deadline, tag);
+    moveProgress.startProgress(duration * 10);
+  }, false);
+
+  document.querySelector('.btn-stop').addEventListener('click', function(e) {
+    e.preventDefault();
+    initializeClock('clockdiv', new Date(), tag);
+    moveProgress.stopProgress();
+  }, false);
+}
 
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
@@ -33,6 +51,7 @@ function getTimeRemaining(endtime) {
 }
 
 function initializeClock(id, endtime, tag) {
+  clearInterval(timeinterval);
   var clock = document.getElementById(id);
   var minute = clock.querySelector('minutediv');
   var second = clock.querySelector('seconddiv');
@@ -58,5 +77,42 @@ function initializeClock(id, endtime, tag) {
   }
 
   updateClock();
-  var timeinterval = setInterval(updateClock, 1000);
+  timeinterval = setInterval(updateClock, 1000);
 }
+
+var moveProgress = (function(interval) {
+  var elem = document.getElementById('progres-line');   
+  var width = 0;
+  var id; 
+  function startProgress(interval) {
+    if (id !== undefined) {
+      clearInterval(id);
+      width = 0;
+      elem.style.width = '0%';
+      elem.style.backgroundColor = '#0675d3';
+      id = setInterval(frame, interval);
+  }
+    else if(!id) {
+      id = setInterval(frame, interval);
+    }
+  };
+  function frame() {    
+    if (width >= 100) {
+      elem.style.backgroundColor = '#30e60b';
+      clearInterval(id);
+    } else {
+      width++; 
+      elem.style.width = width + '%'; 
+    }
+  };
+  function stopProgress() {    
+    if (id !== undefined) {
+      clearInterval(id);
+      elem.style.width = '100%';
+      elem.style.backgroundColor = '#30e60b';
+    }
+  }
+  return { startProgress: startProgress,
+           stopProgress:  stopProgress 
+  };
+})();

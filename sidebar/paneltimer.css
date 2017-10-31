@@ -1,27 +1,92 @@
 body{
   text-align: left;
   font-family: sans-serif;
-  font-weight: 100;
+  font-weight: 120;
+  font-family: -apple-system, sans-serif;
+  line-height: 1.2;
+  margin: 0;
 }
 
-#clockdiv > div{
-    font-family: sans-serif;
-    display: inline-block;
-    text-align: center;
+.clockclass {
+  margin: 0 0px;
+  padding: 27px 27px 5px;
+  text-align: center;
 }
 
 .minuteclass {
-  margin-right: 10px;
+  padding: 0 5px;
+  display: inline-block;
+}
+
+.secondclass {
+  padding: 0 5px;
+  display: inline-block;
 }
 
 .minutefont {
-  font-size: 56px;
+  font-size: 46px;
   color: #0F1126;
   font-weight: bold;
 }
 
 .secondfont {
-  font-size: 56px;
+  font-size: 46px;
   color: #0F1126;
   font-weight: bold;
+  padding: 0 !important;
+}
+
+.doneclass {
+  display: inline-block;
+  font-size: 44px;
+  color: #0F1126;
+  font-weight: bold;
+}
+
+.progress {
+  margin: 0 30px;
+  height: 1px;
+  border: 1px solid #c6c6c6;
+  position: relative;
+}
+
+#progres-line {
+  background-color: #0675d3;
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  top: -1px;
+  height: 3px;
+  width: 0%;
+}
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+}
+
+.btn {
+  height: 30px;
+  flex: 1 1 50%;
+  background-color: #f2f2f2;
+  border-top: 1px solid #d4d4d4;
+  font-size: 12px;
+  line-height: 30px;
+  text-align: center;
+  color: #000;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #d4d4d4;
+}
+
+.btn-blue {
+  background-color: #0996f8;
+  border-top: 1px solid #0675d3;
+  color: #fff;
+}
+.btn-blue:hover {
+  background-color: #0675d3;
 }
