@@ -23,7 +23,7 @@
     },
 
     "browser_action": {
-      "default_icon": "icons/message.svg"
+      "default_icon": "icons/Foxy-SF.svg"
     },
 
     "permissions": ["nativeMessaging",  "bookmarks", "tabs", "activeTab", "<all_urls>"],
