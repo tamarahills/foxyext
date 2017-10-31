@@ -308,6 +308,7 @@ function showHelp(help_visible) {
   if (help_visible) {
   var template = `
   <div class="panel-item-header">
+    <h4 style ="margin: 0px;">Here are some things you can say to Foxy:</h4>
     <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt=""></a>
   </div>
 `;
@@ -330,16 +331,15 @@ if (firstCard) {
 }
 var closeButton = iDiv.querySelector('.panel-item-close');
 if (closeButton) {
-  closeButton.addEventListener('click', function(e) {
-    e.preventDefault();
+  closeButton.addEventListener('click', function(e) {    
+    e.preventDefault();   
     deleteCard(iDiv);
+    window.help_visible = false;
   }, false);
 };
 } else {
   deleteCard(getSidebar().querySelector('.helpcardiv'));
-}
-
-};
+}};
 
 /*
 When the sidebar loads, get the ID of its window,
@@ -353,11 +353,10 @@ browser.windows.getCurrent({populate: true}).then((windowInfo) => {
   deleteBtn.addEventListener('click', function(){
     deleteCards();
   });
-
-  help_visible = false;
+  
   var helpBtn = sidebar.getElementById('help_button');
   helpBtn.addEventListener('click', function(){
-    help_visible = !help_visible;
+    window.help_visible = !window.help_visible;
     showHelp(help_visible);
   }); 
 

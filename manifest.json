@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Hey Foxy Extension",
-  "version": "1.2.7",
+  "version": "1.2.8",
 
   "description": "Agent for Hey Foxy Commands.",
 
@@ -23,7 +23,7 @@
     },
 
     "browser_action": {
-      "default_icon": "icons/message.svg"
+      "default_icon": "icons/Foxy-SF.svg"
     },
 
     "permissions": ["nativeMessaging",  "bookmarks", "tabs", "activeTab", "<all_urls>"],
