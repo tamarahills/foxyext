@@ -144,7 +144,7 @@ port.onMessage.addListener((response) => {
 
       browser.tabs.query({ active: true})
         .then((tabs) => {
-          //port.postMessage(tabs[0].url);
+          port.postMessage(tabs[0].url);
           console.log('Before passing: ' + tabs[0].url);
           iframe.setAttribute("src", '/sidebar/panelpocket.html?title=' +
             tabs[0].title + '&source=' + tabs[0].url);
