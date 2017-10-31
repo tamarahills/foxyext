@@ -65,7 +65,7 @@ div#toolbar {
 .pocketcardiv {
   background-color: #FFFFFF;
   width: 275px;
-  height: 130px;
+  height: 100px;
   margin: 2px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
 }
@@ -81,7 +81,7 @@ div#toolbar {
 .spotifycardiv {
   background-color: #FFFFFF;
   width: 275px;
-  height: 120px;
+  height: 125px;
   margin: 2px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
 }
