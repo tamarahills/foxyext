@@ -1,8 +1,10 @@
-var myWindowId, pocketuser, pocket_access_token, pocket_consumer_token, 
+var myWindowId, pocketuser, pocket_access_token, pocket_consumer_token,
   ga_uuid, ga_property, ga_visitor, mute_state, help_visible;
 
 var port = browser.runtime.connectNative("foxycli");
 console.log('CONNECT NATIVE CALLED');
+
+let miscMatchers = [];
 
 /*
 Listen for messages from the app.
@@ -10,10 +12,10 @@ Listen for messages from the app.
 port.onMessage.addListener((response) => {
   console.log('RECEIVED APP MESSAGE');
   console.log("Received: " + JSON.stringify(response));
-  
+
   var sidebar = getSidebar();
   var iDiv = sidebar.createElement('div');
-  
+
   // Attach the icon for the card.
   var icon = document.createElement('img');
   icon.style['margin-top']="3px";
@@ -67,7 +69,7 @@ port.onMessage.addListener((response) => {
     <span class="speechtext">${response.utterance}</span>
     <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right"></a>
     </div>
-    `;    
+    `;
       icon = '';
       text = '';
       iDiv.innerHTML = template;
@@ -131,7 +133,7 @@ port.onMessage.addListener((response) => {
     <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right"></a>
     </div>
     `;
-    
+
       icon = '';
       text = '';
       iDiv.innerHTML = template;
@@ -158,7 +160,7 @@ port.onMessage.addListener((response) => {
     <span class="speechtext">${response.utterance}</span>
     <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right"></a>
     </div>
-    `;    
+    `;
       icon = '';
       text = '';
       iDiv.innerHTML = template;
@@ -182,7 +184,7 @@ port.onMessage.addListener((response) => {
     <span class="speechtext">${response.utterance}</span>
     <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right"></a>
     </div>
-    `;    
+    `;
       icon = '';
       text = '';
       iDiv.innerHTML = template;
@@ -197,13 +199,25 @@ port.onMessage.addListener((response) => {
       iframe.setAttribute("src", '/sidebar/panelfeedback.html');
       break;
     default: //This is also 'NONE'. If we add another, may need to break it out
-    template = `
-    <div class="panel-item-header">
-    <img src="./resources/confused.svg" height="20" width="20"
-    style="vertical-align: middle;">
-    <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right"></a>
-    </div>
-    `;
+      let foundMisc = false;
+      // Check if any of our miscellaneous matchers can handle this command:
+      for (let miscMatcher of miscMatchers) {
+        if (miscMatcher(response)) {
+          foundMisc = true;
+          break;
+        }
+      }
+      if (foundMisc) {
+        iDiv = null;
+        break;
+      }
+      template = `
+        <div class="panel-item-header">
+        <img src="./resources/confused.svg" height="20" width="20"
+        style="vertical-align: middle;">
+        <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right"></a>
+        </div>
+      `;
       iDiv.className = "confusedcardiv panel-item";
       iDiv.innerHTML = template;
       text.textContent = response.utterance.replace(/['"]+/g, '');
@@ -217,6 +231,11 @@ port.onMessage.addListener((response) => {
       text = '';
       break;
   }
+
+  if (!iDiv) {
+    return;
+  }
+
   if (icon != '')
     iDiv.appendChild(icon);
   if (text != '')
@@ -231,7 +250,7 @@ port.onMessage.addListener((response) => {
       deleteCard(iDiv);
     }, false);
   }
-  
+
   var tb = sidebar.getElementById('toolbar');
   var firstCard = tb.nextSibling;
   if (firstCard) {
@@ -331,8 +350,8 @@ if (firstCard) {
 }
 var closeButton = iDiv.querySelector('.panel-item-close');
 if (closeButton) {
-  closeButton.addEventListener('click', function(e) {    
-    e.preventDefault();   
+  closeButton.addEventListener('click', function(e) {
+    e.preventDefault();
     deleteCard(iDiv);
     window.help_visible = false;
   }, false);
@@ -353,12 +372,12 @@ browser.windows.getCurrent({populate: true}).then((windowInfo) => {
   deleteBtn.addEventListener('click', function(){
     deleteCards();
   });
-  
+
   var helpBtn = sidebar.getElementById('help_button');
   helpBtn.addEventListener('click', function(){
     window.help_visible = !window.help_visible;
     showHelp(help_visible);
-  }); 
+  });
 
   mute_state = false;
   var muteBtn = sidebar.getElementById('mute_button');
@@ -372,3 +391,66 @@ browser.windows.getCurrent({populate: true}).then((windowInfo) => {
     console.log('mute button pushed');
   });
 });
+
+miscMatchers.push(function (response) {
+  if (softCompare(response.utterance, ["open tab", "open top", "new tab"])) {
+    browser.tabs.create({}).then(() => {
+      createCard({message: "Tab opened"});
+    }).catch(errorHandler);
+    return true;
+  }
+});
+
+function softCompare(utterance, matches) {
+  if (typeof matches == "string") {
+    matches = [matches];
+  }
+  utterance = utterance.toLowerCase();
+  utterance = utterance.replace(/[^a-z ]/g, '');
+  utterance = utterance.replace(/\s+/g, ' ');
+  utterance = utterance.replace(/^\s+/, '');
+  utterance = utterance.replace(/\s+$/, '');
+  utterance = utterance.replace(/^the\s+/, '');
+  utterance = utterance.replace(/^please\s+/, '');
+  return matches.includes(utterance);
+}
+
+function errorHandler(err) {
+  console.error("Error:", err);
+}
+
+const defaultTemplate = `
+<div class="panel-item-header">
+  <div class="panel-item-thumb">
+  </div>
+  <span class="fill-message">[message]</span>
+  <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt=""></a>
+</div>
+`;
+
+function createCard(options) {
+  var sidebar = getSidebar();
+  var iDiv = sidebar.createElement('div');
+  iDiv.innerHTML = options.template || defaultTemplate;
+  iDiv.className = `${options.id || 'timercardiv'} panel-item`;
+  for (let name in options) {
+    let elements = iDiv.querySelectorAll(`.fill-${name}`);
+    for (let el of elements) {
+      el.textContent = options[name];
+    }
+  }
+  var closeButton = iDiv.querySelector('.panel-item-close');
+  if (closeButton) {
+    closeButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      deleteCard(iDiv);
+    }, false);
+  }
+  var tb = sidebar.getElementById('toolbar');
+  var firstCard = tb.nextSibling;
+  if (firstCard) {
+    var insertedNode = sidebar.body.insertBefore(iDiv, firstCard);
+  } else {
+    sidebar.body.appendChild(iDiv);
+  }
+}
