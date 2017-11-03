@@ -401,6 +401,23 @@ miscMatchers.push(function (response) {
   }
 });
 
+miscMatchers.push(function (response) {
+  // Note: "play" is already taken by the NPR function, but I leave it here anyway
+  // "pause" will still toggle play and pause
+  // When I say "pause" it comes out "boss" half the time
+  if (softCompare(response.utterance, ["play", "pause", "boss", "play music"])) {
+    let pause = softCompare(response.utterance, ["pause", "boss"]);
+    browser.runtime.sendMessage({command: pause ? "pause" : "play"}).then((result) => {
+      if (result) {
+        createCard({message: pause ? "Paused" : "Played"});
+      } else {
+        createCard({message: "Nothing tab to play/pause"});
+      }
+    }).catch(errorHandler);
+    return true;
+  }
+});
+
 function softCompare(utterance, matches) {
   if (typeof matches == "string") {
     matches = [matches];
