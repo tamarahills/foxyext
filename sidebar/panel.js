@@ -338,7 +338,7 @@ var iframe = sidebar.createElement('iframe');
 iframe.setAttribute("src", '/sidebar/panelhelp.html');
 iframe.frameBorder=0;
 iframe.width = '99%';
-iframe.height = '100%';
+iframe.height = '280px';
 iDiv.appendChild(iframe);
 var tb = sidebar.getElementById('toolbar');
 var firstCard = tb.nextSibling;
