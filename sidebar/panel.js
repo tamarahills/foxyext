@@ -138,9 +138,10 @@ port.onMessage.addListener((response) => {
       iDiv.className = "pocketcardiv panel-item";
      // icon.src = './resources/get_pocket1600.png';
       var iframe = sidebar.createElement('iframe');
+      iframe.setAttribute('onload', 'resizeIframe(this)');
       iframe.frameBorder=0;
       iframe.width = 300;
-      iframe.style.paddingLeft = '11px';
+      iframe.style.paddingLeft = '23px';
 
       browser.tabs.query({ active: true})
         .then((tabs) => {
@@ -372,3 +373,7 @@ browser.windows.getCurrent({populate: true}).then((windowInfo) => {
     console.log('mute button pushed');
   });
 });
+
+function resizeIframe(obj) {
+  obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+}
