@@ -1,19 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
-  var title = getParameterByName('title');
-  var source = getParameterByName('source');
-  console.log('source url is: ' + source);
-  initializeCard(title, extractRootDomain(source));
+    var activeWindow = browser.windows.getLastFocused({populate: true});
+    activeWindow.then(logTabs => {
+        let activeTab = logTabs.tabs.filter(tab => tab.active);
+        initializeCard(activeTab[0].title, extractRootDomain(activeTab[0].url));
+    });
 });
-
-function getParameterByName(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
 
 function extractHostname(url) {
   var hostname;
