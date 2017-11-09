@@ -214,6 +214,9 @@ port.onMessage.addListener((response) => {
       iframe.width = 300;
       iframe.setAttribute("src", '/sidebar/panelfeedback.html');
       break;
+    case 'SHUTUP':
+      toggleShutup();
+      return;
     default: //This is also 'NONE'. If we add another, may need to break it out
     template = `
     <div class="panel-item-header">
