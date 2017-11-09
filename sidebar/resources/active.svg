@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="34px" viewBox="0 0 34 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>Active state</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 0 241 0 241 400 0 400"></polygon>
+        <filter x="-0.2%" y="-0.1%" width="100.4%" height="100.3%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="1" dy="0" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.843137255   0 0 0 0 0.843137255   0 0 0 0 0.858823529  0 0 0 1 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Foxy-sidebar-v1" transform="translate(-617.000000, -336.000000)">
+            <g id="Listening" transform="translate(513.000000, 285.000000)">
+                <g id="Sidebar-/-Template">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Rectangle-2">
+                        <use fill="#FEFEFE" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-1"></use>
+                    </g>
+                </g>
+                <g id="Active-state">
+                    <g id="Icon---mic">
+                        <circle id="Oval" stroke="#0A84FF" cx="121" cy="68" r="16"></circle>
+                        <g id="microphone-16" transform="translate(104.000000, 51.000000)" fill-rule="nonzero" fill="#0A84FF">
+                            <path d="M16.8571429,22.1428571 C18.7506906,22.1428571 20.2857143,20.6078334 20.2857143,18.7142857 L20.2857143,8.42857143 C20.2857143,6.53502371 18.7506906,5 16.8571429,5 C14.9635951,5 13.4285714,6.53502371 13.4285714,8.42857143 L13.4285714,18.7142857 C13.4285714,20.6078334 14.9635951,22.1428571 16.8571429,22.1428571 Z" id="Shape"></path>
+                            <path d="M23.7142857,18.7142857 L23.7142857,16.1428571 C23.7142857,15.6694702 23.3305298,15.2857143 22.8571429,15.2857143 C22.3837559,15.2857143 22,15.6694702 22,16.1428571 L22,18.7142857 C22,21.5546073 19.6974644,23.8571429 16.8571429,23.8571429 C14.0168213,23.8571429 11.7142857,21.5546073 11.7142857,18.7142857 L11.7142857,16.1428571 C11.7142857,15.6694702 11.3305298,15.2857143 10.8571429,15.2857143 C10.3837559,15.2857143 10,15.6694702 10,16.1428571 L10,18.7142857 C10.0116825,21.8315628 12.1245398,24.5486972 15.1428571,25.328 L15.1428571,27.2857143 L12.5714286,27.2857143 C12.0980416,27.2857143 11.7142857,27.6694702 11.7142857,28.1428571 C11.7142857,28.6162441 12.0980416,29 12.5714286,29 L21.1428571,29 C21.6162441,29 22,28.6162441 22,28.1428571 C22,27.6694702 21.6162441,27.2857143 21.1428571,27.2857143 L18.5714286,27.2857143 L18.5714286,25.328 C21.589746,24.5486972 23.7026032,21.8315628 23.7142857,18.7142857 Z" id="Shape"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
