@@ -1,5 +1,7 @@
-var myWindowId, pocketuser, pocket_access_token, pocket_consumer_token,
-  ga_uuid, ga_property, ga_visitor, mute_state, help_visible;
+var myWindowId, pocketuser, pocket_access_token, pocket_consumer_token, 
+  ga_uuid, ga_property, ga_visitor, help_visible;
+
+var mute_state = false;
 
 var port = browser.runtime.connectNative("foxycli");
 console.log('CONNECT NATIVE CALLED');
@@ -10,6 +12,9 @@ let miscMatchers = [];
 Listen for messages from the app.
 */
 port.onMessage.addListener((response) => {
+  if (mute_state) {
+    return;
+  }
   console.log('RECEIVED APP MESSAGE');
   console.log("Received: " + JSON.stringify(response));
 
@@ -32,6 +37,18 @@ port.onMessage.addListener((response) => {
   let template;
 
   switch(response.cmd) {
+    case 'KEYWORD':
+      console.log('DETECTED KEYWORD');
+      if (!mute_state) {
+        console.log('setting spinnter');
+        document.getElementById('microphone').classList.add('spinner');
+        setTimeout(function() { 
+          console.log('removing spinnter');
+          document.getElementById('microphone').classList.remove('spinner');
+        },3000);
+      }
+      break;
+
     case 'TIMER':
       ID = 'timercardiv';
       template = `
@@ -140,9 +157,10 @@ port.onMessage.addListener((response) => {
       iDiv.className = "pocketcardiv panel-item";
      // icon.src = './resources/get_pocket1600.png';
       var iframe = sidebar.createElement('iframe');
+      iframe.setAttribute('onload', 'resizeIframe(this)');
       iframe.frameBorder=0;
       iframe.width = 300;
-      iframe.style.paddingLeft = '11px';
+      iframe.style.paddingLeft = '23px';
 
       browser.tabs.query({ active: true})
         .then((tabs) => {
@@ -379,13 +397,15 @@ browser.windows.getCurrent({populate: true}).then((windowInfo) => {
     showHelp(help_visible);
   });
 
-  mute_state = false;
-  var muteBtn = sidebar.getElementById('mute_button');
-  muteBtn.addEventListener('click', function() {
+  var mute_button = document.getElementById('listening');
+
+  mute_button.addEventListener('click', function() {
+    var img = mute_button.getAttribute('src');
+
     if (!mute_state) {
-      muteBtn.style.backgroundImage = "url('resources/unmute.png')";
+      mute_button.setAttribute('src', './resources/disabled.svg')
     } else {
-      muteBtn.style.backgroundImage = "url('resources/mute.png')";
+      mute_button.setAttribute('src', './resources/listening.svg')
     }
     mute_state = !mute_state;
     console.log('mute button pushed');
@@ -470,4 +490,8 @@ function createCard(options) {
   } else {
     sidebar.body.appendChild(iDiv);
   }
+}
+
+function resizeIframe(obj) {
+  obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
 }
