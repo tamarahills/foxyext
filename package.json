@@ -1,0 +1,23 @@
+{
+  "name": "foxyext",
+  "version": "1.2.13",
+  "description": "Web Extension for Foxy Agent",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^4.11.0",
+    "web-ext": "^2.2.2"
+  },
+  "scripts": {
+    "start": "web-ext run",
+    "lint": "eslint .",
+    "lint:ext": "web-ext lint",
+    "test": "npm run lint && npm run lint:ext"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tamarahills/foxyext"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MPL-2.0"
+}
