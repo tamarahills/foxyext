@@ -45,7 +45,7 @@ port.onMessage.addListener((response) => {
           document.getElementById('microphone').classList.remove('spinner');
         },3000);
       }
-      break;
+      return;
 
     case 'TIMER':
       ID = 'timercardiv';
