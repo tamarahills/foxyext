@@ -26,6 +26,21 @@
       "default_icon": "icons/Foxy-SF.svg"
     },
 
+    "background": {
+      "scripts": [
+        "background/background.js"
+      ]
+    },
+
+    "content_scripts": [
+      {
+        "matches": ["https://music.amazon.com/*"],
+        "js": [
+          "content_scripts/music.amazon.com.js"
+        ]
+      }
+    ],
+
     "permissions": ["nativeMessaging",  "bookmarks", "tabs", "activeTab", "<all_urls>"],
 
     "commands": {
