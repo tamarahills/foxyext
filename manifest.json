@@ -26,6 +26,12 @@
       "default_icon": "icons/Foxy-SF.svg"
     },
 
+    "background": {
+      "scripts": [
+        "background/background.js"
+      ]
+    },
+
     "permissions": ["nativeMessaging",  "bookmarks", "tabs", "activeTab", "<all_urls>"],
 
     "commands": {

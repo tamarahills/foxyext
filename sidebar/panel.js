@@ -1,24 +1,22 @@
-var myWindowId, pocketuser, pocket_access_token, pocket_consumer_token, 
+var myWindowId, pocketuser, pocket_access_token, pocket_consumer_token,
   ga_uuid, ga_property, ga_visitor, help_visible;
 
-var mute_state = false;
-
-var port = browser.runtime.connectNative("foxycli");
-console.log('CONNECT NATIVE CALLED');
-
 /*
-Listen for messages from the app.
+Listen for messages from the app (via the background page).
 */
-port.onMessage.addListener((response) => {
-  if (mute_state) {
+browser.runtime.onMessage.addListener((message) => {
+  if (!message.foxycli) {
+    // Not a message destined for us here
     return;
   }
+  var response = message.foxycli;
+
   console.log('RECEIVED APP MESSAGE');
   console.log("Received: " + JSON.stringify(response));
-  
+
   var sidebar = getSidebar();
   var iDiv = sidebar.createElement('div');
-  
+
   // Attach the icon for the card.
   var icon = document.createElement('img');
   icon.style['margin-top']="3px";
@@ -37,15 +35,13 @@ port.onMessage.addListener((response) => {
   switch(response.cmd) {
     case 'KEYWORD':
       console.log('DETECTED KEYWORD');
-      if (!mute_state) {
-        console.log('setting spinnter');
-        document.getElementById('microphone').classList.add('spinner');
-        setTimeout(function() { 
-          console.log('removing spinnter');
-          document.getElementById('microphone').classList.remove('spinner');
-        },3000);
-      }
-      return;
+      console.log('setting spinner');
+      document.getElementById('microphone').classList.add('spinner');
+      setTimeout(function() {
+        console.log('removing spinnter');
+        document.getElementById('microphone').classList.remove('spinner');
+      },3000);
+      break;
 
     case 'TIMER':
       ID = 'timercardiv';
@@ -84,7 +80,7 @@ port.onMessage.addListener((response) => {
     <span class="speechtext">${response.utterance}</span>
     <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right"></a>
     </div>
-    `;    
+    `;
       icon = '';
       text = '';
       iDiv.innerHTML = template;
@@ -148,7 +144,7 @@ port.onMessage.addListener((response) => {
     <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right"></a>
     </div>
     `;
-    
+
       icon = '';
       text = '';
       iDiv.innerHTML = template;
@@ -162,7 +158,10 @@ port.onMessage.addListener((response) => {
 
       browser.tabs.query({ active: true})
         .then((tabs) => {
-          port.postMessage(tabs[0].url);
+          browser.runtime.sendMessage({
+            type: "port.postMessage",
+            body: tabs[0].url
+          });
           console.log('Before passing: ' + tabs[0].url);
           iframe.setAttribute("src", '/sidebar/panelpocket.html?title=' +
             tabs[0].title + '&source=' + tabs[0].url);
@@ -176,7 +175,7 @@ port.onMessage.addListener((response) => {
     <span class="speechtext">${response.utterance}</span>
     <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right"></a>
     </div>
-    `;    
+    `;
       icon = '';
       text = '';
       iDiv.innerHTML = template;
@@ -200,7 +199,7 @@ port.onMessage.addListener((response) => {
     <span class="speechtext">${response.utterance}</span>
     <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right"></a>
     </div>
-    `;    
+    `;
       icon = '';
       text = '';
       iDiv.innerHTML = template;
@@ -252,7 +251,7 @@ port.onMessage.addListener((response) => {
       deleteCard(iDiv);
     }, false);
   }
-  
+
   var tb = sidebar.getElementById('toolbar');
   var firstCard = tb.nextSibling;
   if (firstCard) {
@@ -352,8 +351,8 @@ if (firstCard) {
 }
 var closeButton = iDiv.querySelector('.panel-item-close');
 if (closeButton) {
-  closeButton.addEventListener('click', function(e) {    
-    e.preventDefault();   
+  closeButton.addEventListener('click', function(e) {
+    e.preventDefault();
     deleteCard(iDiv);
     window.help_visible = false;
   }, false);
@@ -374,14 +373,15 @@ browser.windows.getCurrent({populate: true}).then((windowInfo) => {
   deleteBtn.addEventListener('click', function(){
     deleteCards();
   });
-  
+
   var helpBtn = sidebar.getElementById('help_button');
   helpBtn.addEventListener('click', function(){
     window.help_visible = !window.help_visible;
     showHelp(help_visible);
-  }); 
+  });
 
   var mute_button = document.getElementById('listening');
+  var mute_state = false;
 
   mute_button.addEventListener('click', function() {
     var img = mute_button.getAttribute('src');
@@ -392,6 +392,10 @@ browser.windows.getCurrent({populate: true}).then((windowInfo) => {
       mute_button.setAttribute('src', './resources/listening.svg')
     }
     mute_state = !mute_state;
+    browser.runtime.sendMessage({
+      type: "set_mute_state",
+      value: mute_state
+    });
     console.log('mute button pushed');
   });
 });
