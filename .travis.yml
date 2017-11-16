@@ -1,0 +1,10 @@
+language: node_js
+
+sudo: required
+
+script:
+  - npm install
+  - npm run lint
+
+node_js:
+  - 7

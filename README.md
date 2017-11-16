@@ -1,4 +1,4 @@
-# foxyext
+# foxyext  [![Build Status](https://travis-ci.org/tamarahills/foxyext.svg?branch=master)](https://travis-ci.org/tamarahills/foxyext)
 Web Extension for Foxy Agent
 
 This is the extension that communicates with the foxycli.  It uses Web Extension Native Messaging to pass messages to the client. The Web Extension will take actions inside the browser such as displaying the weather, showing a timer, based on voice utterances from the user that begin with "Hey Foxy".
