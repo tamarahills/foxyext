@@ -86,6 +86,14 @@ div#toolbar {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
 }
 
+.screenshotdiv {
+  background-color: #FFFFFF;
+  width: 275px;
+  height: 120px;
+  margin: 2px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
+}
+
 .confusedcardiv {
   background-color: #FFFFFF;
   width: 275px;
