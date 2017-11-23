@@ -34,7 +34,7 @@ port.onMessage.addListener((response) => {
   let ID;
   let template;
 
-  switch(response.cmd) {
+  switch (response.cmd) {
     case 'KEYWORD':
       console.log('DETECTED KEYWORD');
       if (!mute_state) {
@@ -43,7 +43,7 @@ port.onMessage.addListener((response) => {
         setTimeout(function() {
           console.log('removing spinnter');
           document.getElementById('microphone').classList.remove('spinner');
-        },3000);
+        }, 3000);
       }
       return;
 
@@ -102,7 +102,7 @@ port.onMessage.addListener((response) => {
       template = `
         <div class="panel-item-header">
           <div class="panel-item-thumb">
-            <img src="${findProperWeatherImage(response.param5)}" alt="">
+            <img src=".${findProperWeatherImage(response.param5)}" alt="">
           </div>
           <span class="speechtext">${response.utterance}</span>
           <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt=""></a>
@@ -123,6 +123,15 @@ port.onMessage.addListener((response) => {
         + response.param2 + '&min=' + response.param3 + '&max=' +
         + response.param4 + '&description=' + response.param5
         + '&time=' + localTime.time + '&day=' + localTime.day);
+
+      const messageContent = () => {
+        const gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
+        gettingActiveTab.then((tabs) => {
+          browser.tabs.sendMessage(tabs[0].id, {response: response, imgUrl: findProperWeatherImage(response.param5)});
+        });
+      };
+
+      const reportErr = (err) => console.log('Error occured: ', err);
       break;
     case 'IOT':
       iDiv.className = "iotcardiv";
@@ -325,26 +334,26 @@ function getSidebar() {
 // TODO:  Share this code so we don't have to duplicate.  We need to add a
 // require.js or something similar to share this.
 function findProperWeatherImage(weatherDesc) {
-  var imagefile = '';
+  var imageFile = '';
   var desc = weatherDesc.toLowerCase()
   if (desc.indexOf('sun') !== -1) {
-      imageFile = './resources/sun.svg';
+      imageFile = '/resources/sun.svg';
   } else if (desc.indexOf('cloud') !== -1) {
-    imageFile = './resources/cloudy.svg';
+    imageFile = '/resources/cloudy.svg';
   } else if (desc.indexOf('rain') !== -1) {
-    imageFile = './resources/rain.svg';
+    imageFile = '/resources/rain.svg';
   } else if (desc.indexOf('snow') !== -1) {
-    imageFile = './resources/snow.svg';
+    imageFile = '/resources/snow.svg';
   } else if (desc.indexOf('rain') !== -1) {
-    imageFile = './resources/rain.svg';
+    imageFile = '/resources/rain.svg';
   } else if (desc.indexOf('wind') !== -1) {
-    imageFile = './resources/wind.svg';
+    imageFile = '/resources/wind.svg';
   } else if (desc.indexOf('clear') !== -1) {
-    imageFile = './resources/sun.svg';
+    imageFile = '/resources/sun.svg';
   } else {
     // We should try and get an icon for
     // 'haze', 'clear', and thunderstorm too
-    imageFile = './resources/cloudy.svg';
+    imageFile = '/resources/cloudy.svg';
   }
 
   return imageFile;

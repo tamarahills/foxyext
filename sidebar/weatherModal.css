@@ -1,0 +1,91 @@
+.foxy-content .high-low {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+    justify-content: flex-start;
+    margin-top: 18px;
+}
+
+.foxy-content .high {
+    font-size: 13px;
+    color: #0F1126;
+    margin-bottom: 7px;
+}
+
+.foxy-content .low {
+    font-size: 13px;
+    color: #0F1126;
+}
+
+.foxy-content .fahrenheit-sign {
+    font-size: 12px;
+    color: #0F1126;
+    margin-left: 2px;
+    margin-top: 18px;
+}
+
+.foxy-content .temperature {
+    font-size: 57px;
+    color: #0F1126;
+    font-weight: bold;
+    vertical-align: top;
+    padding-left: 10px
+}
+
+.foxy-content .img {
+    width: 52px;
+}
+
+.foxy-content .info {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.foxy-content .header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.foxy-content .description {
+    font-size: 14px;
+    color: #0F1126;
+}
+
+.foxy-content .city {
+    font-size: 21px;
+    color: #0F1126;
+    font-weight: bold;
+}
+
+.foxy-btn-close {
+    border: none;
+    font-size: 15px;
+    color: #d9d9d9;
+    margin-top: -10px;
+}
+
+.foxy-content {
+    background-color: #fefefe;
+    font-family: -apple-system, sans-serif;
+    padding: 10px 10px 10px 22px;
+    width: 27%;
+    height: auto;
+    border: 2px;
+    border-radius: 8px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    margin: 0;
+}
+
+.foxy-background {
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
