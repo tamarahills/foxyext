@@ -5,11 +5,14 @@
   "dependencies": {},
   "devDependencies": {
     "eslint": "^4.11.0",
+    "stylelint": "^8.2.0",
+    "stylelint-config-standard": "^17.0.0",
     "web-ext": "^2.2.2"
   },
   "scripts": {
     "start": "web-ext run",
     "lint": "eslint .",
+    "lint:css": "stylelint **/*.css",
     "lint:ext": "web-ext lint",
     "test": "npm run lint && npm run lint:ext"
   },
