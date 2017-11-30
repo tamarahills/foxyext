@@ -46,7 +46,7 @@ div#toolbar {
 @keyframes spinner {
   to {transform: rotate(360deg);}
 }
- 
+
 .spinner:before {
   content: '';
   box-sizing: border-box;
@@ -136,6 +136,10 @@ div#toolbar {
   height: 150px;
   margin: 2px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
+}
+
+.screenshot {
+  height: 100px;
 }
 
 .iotcardiv,

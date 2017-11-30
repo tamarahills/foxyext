@@ -1,4 +1,4 @@
-var myWindowId, pocketuser, pocket_access_token, pocket_consumer_token, 
+var myWindowId, pocketuser, pocket_access_token, pocket_consumer_token,
   ga_uuid, ga_property, ga_visitor, help_visible;
 
 var mute_state = false;
@@ -15,10 +15,10 @@ port.onMessage.addListener((response) => {
   }
   console.log('RECEIVED APP MESSAGE');
   console.log("Received: " + JSON.stringify(response));
-  
+
   var sidebar = getSidebar();
   var iDiv = sidebar.createElement('div');
-  
+
   // Attach the icon for the card.
   var icon = document.createElement('img');
   icon.style['margin-top']="3px";
@@ -40,7 +40,7 @@ port.onMessage.addListener((response) => {
       if (!mute_state) {
         console.log('setting spinnter');
         document.getElementById('microphone').classList.add('spinner');
-        setTimeout(function() { 
+        setTimeout(function() {
           console.log('removing spinnter');
           document.getElementById('microphone').classList.remove('spinner');
         },3000);
@@ -84,7 +84,7 @@ port.onMessage.addListener((response) => {
     <span class="speechtext">${response.utterance}</span>
     <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right"></a>
     </div>
-    `;    
+    `;
       icon = '';
       text = '';
       iDiv.innerHTML = template;
@@ -148,7 +148,7 @@ port.onMessage.addListener((response) => {
     <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right"></a>
     </div>
     `;
-    
+
       icon = '';
       text = '';
       iDiv.innerHTML = template;
@@ -176,7 +176,7 @@ port.onMessage.addListener((response) => {
     <span class="speechtext">${response.utterance}</span>
     <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right"></a>
     </div>
-    `;    
+    `;
       icon = '';
       text = '';
       iDiv.innerHTML = template;
@@ -200,7 +200,7 @@ port.onMessage.addListener((response) => {
     <span class="speechtext">${response.utterance}</span>
     <a href="/" class="panel-item-close"><img src="resources/close-16.svg" alt="" style="float: right"></a>
     </div>
-    `;    
+    `;
       icon = '';
       text = '';
       iDiv.innerHTML = template;
@@ -217,6 +217,30 @@ port.onMessage.addListener((response) => {
     case 'SHUTUP':
       toggleShutup();
       return;
+    case 'SCREENSHOT':
+      template = `
+      <div class="panel-item-header">
+        <img src="./resources/screenshot.png" height="20" width="20"
+          style="vertical-align: middle;" />
+        <span class="speechtext">${response.utterance}</span>
+        <a href="/" class="panel-item-close">
+          <img src="resources/close-16.svg" alt="" style="float: right">
+        </a>
+      </div>
+      `;
+      icon = '';
+      text = '';
+      iDiv.innerHTML = template;
+      iDiv.className = 'screenshot panel-item';
+
+      iframe = sidebar.createElement('iframe');
+      iframe.frameBorder = 0;
+      iframe.className = 'panel-item-frame';
+      iframe.width = 300;
+      iframe.height = 80;
+      iframe.setAttribute('src', '/sidebar/screenshot/panelscreenshot.html');
+      iframe.scrolling = 'no';
+      break;
     case 'BOOKMARK':
       template = `
       <div class="panel-item-header">
@@ -273,7 +297,7 @@ port.onMessage.addListener((response) => {
       deleteCard(iDiv);
     }, false);
   }
-  
+
   var tb = sidebar.getElementById('toolbar');
   var firstCard = tb.nextSibling;
   if (firstCard) {
@@ -373,8 +397,8 @@ if (firstCard) {
 }
 var closeButton = iDiv.querySelector('.panel-item-close');
 if (closeButton) {
-  closeButton.addEventListener('click', function(e) {    
-    e.preventDefault();   
+  closeButton.addEventListener('click', function(e) {
+    e.preventDefault();
     deleteCard(iDiv);
     window.help_visible = false;
   }, false);
@@ -395,12 +419,12 @@ browser.windows.getCurrent({populate: true}).then((windowInfo) => {
   deleteBtn.addEventListener('click', function(){
     deleteCards();
   });
-  
+
   var helpBtn = sidebar.getElementById('help_button');
   helpBtn.addEventListener('click', function(){
     window.help_visible = !window.help_visible;
     showHelp(help_visible);
-  }); 
+  });
 
   var mute_button = document.getElementById('listening');
 
