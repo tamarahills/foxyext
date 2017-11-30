@@ -1,5 +1,4 @@
-var myWindowId, pocketuser, pocket_access_token, pocket_consumer_token,
-  ga_uuid, ga_property, ga_visitor, help_visible;
+var help_visible;
 
 var mute_state = false;
 
@@ -18,6 +17,11 @@ port.onMessage.addListener((response) => {
 
   var sidebar = getSidebar();
   var iDiv = sidebar.createElement('div');
+
+  var iframe = sidebar.createElement('iframe');
+  iframe.frameBorder = 0;
+  iframe.width = 300;
+  iframe.scrolling = 'no';
 
   // Attach the icon for the card.
   var icon = document.createElement('img');
@@ -64,8 +68,6 @@ port.onMessage.addListener((response) => {
       icon = '';
       text = '';
 
-      var iframe = sidebar.createElement('iframe');
-      iframe.frameBorder = 0;
       iframe.className = 'panel-item-frame';
 
       if (response.param2) {
@@ -90,12 +92,8 @@ port.onMessage.addListener((response) => {
       iDiv.innerHTML = template;
       iDiv.className = "spotifycardiv panel-item";
 
-      var iframe = sidebar.createElement('iframe');
       iframe.setAttribute("src", '/sidebar/spotify.html?playlist=' + response.param);
-      iframe.width = 300;
       iframe.height = 100;
-      iframe.frameBorder = 0;
-      iframe.scrolling = "no";
       break;
     case 'WEATHER':
       ID = 'weathercardiv';
@@ -115,9 +113,7 @@ port.onMessage.addListener((response) => {
       text = '';
 
       var localTime = response.localTime || {};
-      var iframe = sidebar.createElement('iframe');
-      iframe.frameBorder=0;
-      iframe.width = 300;
+
       iframe.setAttribute("src", '/sidebar/panelweather.html?city='
         + response.param + '&weather=' + response.param5 + '&temp=' +
         + response.param2 + '&min=' + response.param3 + '&max=' +
@@ -126,15 +122,12 @@ port.onMessage.addListener((response) => {
       break;
     case 'IOT':
       iDiv.className = "iotcardiv";
-      if(response.param2 == 'on') {
+      // if(response.param2 == 'on') {
         // iDiv.style.backgroundImage = "url('resources/sunburst.png')";
-      }
+      // }
 
       icon.src = "./resources/foxyhome.svg";
 
-      var iframe = sidebar.createElement('iframe');
-      iframe.frameBorder=0;
-      iframe.width = 300;
       iframe.height = 185;
       iframe.setAttribute("src", '/sidebar/paneliot.html?room='
         + response.param + '&onoff=' + response.param2);
@@ -153,11 +146,8 @@ port.onMessage.addListener((response) => {
       text = '';
       iDiv.innerHTML = template;
       iDiv.className = "pocketcardiv panel-item";
-     // icon.src = './resources/get_pocket1600.png';
-      var iframe = sidebar.createElement('iframe');
+
       iframe.setAttribute('onload', 'resizeIframe(this)');
-      iframe.frameBorder=0;
-      iframe.width = 300;
       iframe.style.paddingLeft = '23px';
 
       browser.tabs.query({ active: true})
@@ -182,16 +172,11 @@ port.onMessage.addListener((response) => {
       iDiv.innerHTML = template;
       iDiv.className = "nprcardiv panel-item";
 
-      var iframe = sidebar.createElement('iframe');
-      iframe.frameBorder=0;
-      iframe.width = 300;
       iframe.setAttribute("src", '/sidebar/panelnpr.html');
       break;
     case 'GA':
       console.log('got GA request!!!');
-      ga_property = response.param;
-      ga_uuid = response.param2;
-      break;
+      return;
     case 'FEEDBACK':
     template = `
     <div class="panel-item-header">
@@ -204,14 +189,8 @@ port.onMessage.addListener((response) => {
       icon = '';
       text = '';
       iDiv.innerHTML = template;
-      // icon.src = './resources/Check_mark.png';
-      // icon.height = 20;
-      // icon.width = 20;
       iDiv.className = 'feedbackcardiv panel-item';
 
-      var iframe = sidebar.createElement('iframe');
-      iframe.frameBorder=0;
-      iframe.width = 300;
       iframe.setAttribute("src", '/sidebar/panelfeedback.html');
       break;
     case 'SHUTUP':
@@ -274,8 +253,6 @@ port.onMessage.addListener((response) => {
       iDiv.innerHTML = template;
       text.textContent = response.utterance.replace(/['"]+/g, '');
 
-      var iframe = sidebar.createElement('iframe');
-      iframe.frameBorder=0;
       iframe.width = '99%';
       iframe.setAttribute("src", '/sidebar/panelconfused.html?text='
         + response.utterance);
@@ -301,7 +278,7 @@ port.onMessage.addListener((response) => {
   var tb = sidebar.getElementById('toolbar');
   var firstCard = tb.nextSibling;
   if (firstCard) {
-    var insertedNode = sidebar.body.insertBefore(iDiv, firstCard);
+    sidebar.body.insertBefore(iDiv, firstCard);
   } else {
     sidebar.body.appendChild(iDiv);
   }
@@ -325,7 +302,7 @@ function getSidebar() {
 // TODO:  Share this code so we don't have to duplicate.  We need to add a
 // require.js or something similar to share this.
 function findProperWeatherImage(weatherDesc) {
-  var imagefile = '';
+  var imageFile = '';
   var desc = weatherDesc.toLowerCase()
   if (desc.indexOf('sun') !== -1) {
       imageFile = './resources/sun.svg';
@@ -354,7 +331,6 @@ function deleteCards() {
   var sidebar = getSidebar();
   console.log('sidebar is:' + sidebar);
   if (sidebar.body.hasChildNodes()) {
-    var children = sidebar.body.childNodes;
     var tb = '';
     while (sidebar.body.firstChild) {
       var temp = sidebar.body.removeChild(sidebar.body.firstChild);
@@ -411,9 +387,7 @@ if (closeButton) {
 When the sidebar loads, get the ID of its window,
 and update its content.
 */
-browser.windows.getCurrent({populate: true}).then((windowInfo) => {
-  myWindowId = windowInfo.id;
-
+browser.windows.getCurrent({populate: true}).then(() => {
   var sidebar = getSidebar();
   var deleteBtn = sidebar.getElementById('clear_button');
   deleteBtn.addEventListener('click', function(){
@@ -429,7 +403,7 @@ browser.windows.getCurrent({populate: true}).then((windowInfo) => {
   var mute_button = document.getElementById('listening');
 
   mute_button.addEventListener('click', function() {
-    var img = mute_button.getAttribute('src');
+    mute_button.getAttribute('src');
 
     if (!mute_state) {
       mute_button.setAttribute('src', './resources/disabled.svg')
