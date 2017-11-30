@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   var playlist = getParameterByName('playlist');
   console.log('Playlist is:' + playlist);
-  document.getElementById('playlistiFrame').src = 'https://open.spotify.com/embed/user/spotify/playlist/' + playlist;
+  document.getElementById('playlistiFrame').src = 'https://open.spotify.com/embed?uri=' + playlist;
 });
 
 function getParameterByName(name, url) {
