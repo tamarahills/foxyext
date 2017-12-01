@@ -4,6 +4,9 @@ env:
   es6: true
   webextensions: true
 
+globals:
+  browser: true
+
 extends:
   - eslint:recommended
   - plugin:mozilla/recommended
@@ -15,12 +18,16 @@ plugins:
 root: true
 
 rules:
-  consistent-return: off # TODO: remove, and default to mozilla/recommended of "error"
-  eqeqeq: off # TODO: change to "error"
-  no-console: [error, {allow: [debug, error, info, trace, warn]}]
-  no-var: off # TODO: change to "error"
-  prefer-const: off # TODO: change to "error"
-  quotes: [off, double] # TODO: change to "error"
+  curly: error
+  brace-style: [error, 1tbs]
+  indent: [error, 2, { SwitchCase: 1 }]
+  eqeqeq: error
+  no-console: [error, { allow: [debug, error, info, trace, warn] }]
+  no-var: error # TODO: change to "error"
+  prefer-const: error # TODO: change to "error"
+  quotes: [error, single]
+  quote-props: [error, as-needed]
+  one-var: [error, never]
 
   promise/always-return: off
   promise/avoid-new: off

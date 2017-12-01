@@ -20,4 +20,4 @@ document.addEventListener('DOMContentLoaded', () => {
       heading.innerText = 'Sorry, I cannot screenshot this.';
       container.appendChild(heading);
     });
-})
+});

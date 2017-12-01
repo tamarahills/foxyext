@@ -1,39 +1,45 @@
-document.addEventListener('DOMContentLoaded', function () {
-  var city = getParameterByName('city');
-  var weather = getParameterByName('weather');
-  var temp = getParameterByName('temp');
-  var min = getParameterByName('min');
-  var max = getParameterByName('max');
-  var desc = getParameterByName('description');
-  var localTime = getParameterByName('time');
-  var localDay = getParameterByName('day');
+document.addEventListener('DOMContentLoaded', () => {
+  const city = getParameterByName('city');
+  const weather = getParameterByName('weather');
+  const temp = getParameterByName('temp');
+  const min = getParameterByName('min');
+  const max = getParameterByName('max');
+  const description = getParameterByName('description');
+  const localTime = getParameterByName('time');
+  const localDay = getParameterByName('day');
 
-  initializeWeather(city, weather, temp, min, max, desc, localTime, localDay);
+  initializeWeather(city, weather, temp, min, max, description, localTime, localDay);
 });
 
 function getParameterByName(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  if (!url) {
+    url = window.location.href;
+  }
+  name = name.replace(/[[\]]/g, '\\$&');
+  const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+  const results = regex.exec(url);
+  if (!results) {
+    return null;
+  }
+  if (!results[2]) {
+    return '';
+  }
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
 function initializeWeather(city, weather, temp, min, max, desc, localTime, localDay) {
-  var weather = document.getElementById('weatherdiv');
-  var citySpan = weather.querySelector('.cityfont');
+  const weatherContainer = document.getElementById('weatherdiv');
+  const citySpan = weatherContainer.querySelector('.cityfont');
 
-  var weatherDescDiv = document.getElementById('weatherDescDiv');
-  var descriptionSpan = weatherDescDiv.querySelector('.descriptionfont');
+  const weatherDescDiv = document.getElementById('weatherDescDiv');
+  const descriptionSpan = weatherDescDiv.querySelector('.descriptionfont');
 
-  var subweatherdiv = document.getElementById('subweatherdiv');
-  var currtempSpan = subweatherdiv.querySelector('.currtempfont');
-  document.getElementById("weatherImage").src = findProperWeatherImage(desc);
+  const subweatherdiv = document.getElementById('subweatherdiv');
+  const currtempSpan = subweatherdiv.querySelector('.currtempfont');
+  document.getElementById('weatherImage').src = findProperWeatherImage(desc);
 
-  var highlow = document.getElementById('highlowdiv');
-  var highlowtempfontSpan = highlow.querySelector('.highlowtempfont');
+  const highlow = document.getElementById('highlowdiv');
+  const highlowtempfontSpan = highlow.querySelector('.highlowtempfont');
 
   citySpan.innerHTML = city;
   descriptionSpan.innerHTML = `${localDay}, ${localTime} - ${desc}`;
@@ -42,10 +48,10 @@ function initializeWeather(city, weather, temp, min, max, desc, localTime, local
 }
 
 function findProperWeatherImage(weatherDesc) {
-  var imagefile = '';
-  var desc = weatherDesc.toLowerCase()
+  let imageFile = '';
+  const desc = weatherDesc.toLowerCase();
   if (desc.indexOf('sun') !== -1) {
-      imageFile = './resources/sun.svg';
+    imageFile = './resources/sun.svg';
   } else if (desc.indexOf('cloud') !== -1) {
     imageFile = './resources/cloudy.svg';
   } else if (desc.indexOf('rain') !== -1) {

@@ -1,6 +1,5 @@
-body{
+body {
   text-align: left;
-  font-family: sans-serif;
   font-weight: 120;
   font-family: -apple-system, sans-serif;
   line-height: 1.2;
@@ -8,7 +7,7 @@ body{
 }
 
 .clockclass {
-  margin: 0 0px;
+  margin: 0;
   padding: 27px 27px 5px;
   text-align: center;
 }
@@ -25,13 +24,13 @@ body{
 
 .minutefont {
   font-size: 46px;
-  color: #0F1126;
+  color: #0f1126;
   font-weight: bold;
 }
 
 .secondfont {
   font-size: 46px;
-  color: #0F1126;
+  color: #0f1126;
   font-weight: bold;
   padding: 0 !important;
 }
@@ -39,7 +38,7 @@ body{
 .doneclass {
   display: inline-block;
   font-size: 44px;
-  color: #0F1126;
+  color: #0f1126;
   font-weight: bold;
 }
 
@@ -87,6 +86,7 @@ body{
   border-top: 1px solid #0675d3;
   color: #fff;
 }
+
 .btn-blue:hover {
   background-color: #0675d3;
 }
