@@ -1,5 +1,5 @@
 html,
-body{
+body {
   height: 100%;
 }
 
@@ -7,9 +7,10 @@ html {
   overflow-y: hidden;
 }
 
-body{
+body {
   margin: 0;
 }
+
 .graphicLightDiv {
   text-align: center;
   background-image: url("resources/sunburst.png");
@@ -20,19 +21,19 @@ body{
   padding-top: 30px;
 }
 
-.graphicLightDiv--off{
+.graphicLightDiv--off {
   background-image: none;
   background-color: #fff;
 }
 
 .lightOn {
-  margin:  auto;
+  margin: auto;
   display: block;
 }
 
 .roomFont {
   font-size: 15px;
-  color: #0F1126;
+  color: #0f1126;
   font-weight: bold;
   font-family: sans-serif;
   display: inline-block;

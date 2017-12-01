@@ -8,13 +8,16 @@
     "eslint-plugin-mozilla": "^0.4.9",
     "eslint-plugin-no-unsanitized": "^2.0.1",
     "eslint-plugin-promise": "^3.6.0",
+    "stylelint": "^8.3.1",
+    "stylelint-config-standard": "^18.0.0",
     "web-ext": "^2.2.2"
   },
   "scripts": {
     "start": "web-ext run",
     "lint": "eslint .",
     "lint:ext": "web-ext lint",
-    "test": "npm run lint && npm run lint:ext"
+    "lint:css": "stylelint **/*.css",
+    "test": "npm run lint:css && npm run lint && npm run lint:ext"
   },
   "repository": {
     "type": "git",

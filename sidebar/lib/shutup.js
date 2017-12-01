@@ -1,4 +1,4 @@
-var shutupEnable = false;
+let shutupEnable = false;
 
 function wrapper(id, ci, tab) {
   shutupTab(tab);

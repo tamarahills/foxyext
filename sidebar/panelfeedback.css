@@ -1,18 +1,17 @@
-body{
-    text-align: left;
-    font-family: sans-serif;
-    font-weight: 100;
-  }
-  
-  #foxyTextDiv {
-    padding-top: 22px;
-  }
-  
-  .feedbackFont {
-    font-size: 15px;
-    color: #0F1126;
-    font-weight: bold;
-    font-family: sans-serif;
-    display: inline-block;
-  }
-  
+body {
+  text-align: left;
+  font-family: sans-serif;
+  font-weight: 100;
+}
+
+#foxyTextDiv {
+  padding-top: 22px;
+}
+
+.feedbackFont {
+  font-size: 15px;
+  color: #0f1126;
+  font-weight: bold;
+  font-family: sans-serif;
+  display: inline-block;
+}

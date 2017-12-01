@@ -1,4 +1,4 @@
-body{
+body {
   text-align: left;
   font-family: sans-serif;
   font-weight: 100;
@@ -10,14 +10,14 @@ body{
 
 .explainFont {
   font-size: 15px;
-  color: #0F1126;
+  color: #0f1126;
   font-weight: bold;
   display: block;
 }
 
 .explainMoreFont {
   font-size: 12px;
-  color: #0F1126;
+  color: #0f1126;
   font-weight: normal;
 }
 
@@ -26,18 +26,18 @@ body{
   font-size: 12px;
   font-style: italic;
   color: #ff0039;
-  text-overflow:ellipsis;
+  text-overflow: ellipsis;
   overflow: hidden;
   width: 90%;
   white-space: nowrap;
   display: inline-block;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .searchFont {
   display: inline;
   font-size: 12px;
   font-style: italic;
-  color: #0F1126;
+  color: #0f1126;
   padding-right: 15px;
 }
