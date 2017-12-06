@@ -28,4 +28,3 @@ function toggleShutup() {
     }
   }
 }
-browser.browserAction.onClicked.addListener(toggleShutup);
